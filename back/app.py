@@ -1,7 +1,6 @@
-from flask import Flask, request, jsonify, make_response, g
-from functools import wraps
+from flask import Flask, request, make_response, g
 import jwt
-import core
+import core_jwt
 
 app = Flask(__name__)
 
