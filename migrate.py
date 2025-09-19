@@ -12,12 +12,13 @@ conn = psycopg2.connect(
 
 cursor = conn.cursor()
 
+
 def migrate_query(filename: str) -> None:
     with open(filename, 'r') as f:
         sql_script = f.read()
     # Удаляем комментарии и лишние пробелы
     cleaned_script = '\n'.join(
-        line for line in sql_script.split('\n') 
+        line for line in sql_script.split('\n')
         if not line.strip().startswith('--')
     )
 
@@ -25,6 +26,7 @@ def migrate_query(filename: str) -> None:
     for query in cleaned_script.split(';'):
         if query.strip():
             cursor.execute(query)
+
 
 all_files = os.listdir('migration')
 

@@ -51,6 +51,7 @@ class UpcomingEvent:
     def __init__(self):
         pass
 
+
 class Registration:
     Id: int
     Eid: int
