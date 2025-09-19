@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, make_response, g
 from functools import wraps
 from config import reader
-from core import verify_user, generate_jwt, create_recording
+from core import verify_user, generate_jwt, create_recording, add
 import jwt
 
 reader.read_config()
@@ -11,12 +11,16 @@ app = Flask(__name__)
 @app.before_request
 def jwt_required():
     if request.path not in ['/login', '/reguster']:
-        try:
-            token = request.cookies['access_token']
-            decoded = jwt.decode(token, reader.get_param_value("jwt-key"), algorithms=["HS256"])
-            g.uid = decoded['uid']
-        except:
-            return make_response({}, 401)
+        # ВРЕМЕННО ЗАКОММЕНТИРОВАНО
+        # try:
+        #     token = request.cookies['access_token']
+        #     decoded = jwt.decode(token, reader.get_param_value("jwt-key"), algorithms=["HS256"])
+        #     g.uid = decoded['uid']
+        # except:
+        #     return make_response({}, 401)
+
+        # ЭТО НЕПОТРЕБСТВО УБРАТЬ ПОСЛЕ ТОГО, КАК НАЛАДИТСЯ БД
+        g.uid = 1
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -40,4 +44,11 @@ def create():
     create_recording(category, g.uid)
     return make_response({}, 200)
 
+@app.route('/add', methods=['POST'])
+def add_info():
+    data = request.json
+    add(data, g.uid)
+    return jsonify(data)
+
+app.run(debug=True, port=5000, host='0.0.0.0')
     
