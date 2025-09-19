@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.before_request
 def jwt_required():
     if request.path not in ['/login', '/reguster']:
-        # п▓п═п∙п°п∙п²п²п· п≈п░п п·п°п°п∙п²п╒п≤п═п·п▓п░п²п·
+        # бпелеммн гюйнллемрхпнбюмн
         # try:
         #     token = request.cookies['access_token']
         #     decoded = jwt.decode(token, reader.get_param_value("jwt-key"), algorithms=["HS256"])
@@ -19,7 +19,7 @@ def jwt_required():
         # except:
         #     return make_response({}, 401)
 
-        # п╜п╒п· п²п∙п÷п·п╒п═п∙п▒п║п╒п▓п· пёп▒п═п░п╒п╛ п÷п·п║п⌡п∙ п╒п·п⌠п·, п п░п  п²п░п⌡п░п■п≤п╒п║п╞ п▒п■
+        # щрн меонрпеаярбн сапюрэ оняке рнцн, йюй мюкюдхряъ ад
         g.uid = 1
 
 @app.route('/login', methods=['POST'])
