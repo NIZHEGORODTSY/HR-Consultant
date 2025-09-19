@@ -1,0 +1,66 @@
+import psycopg2
+import logging
+from functools import wraps
+from config import reader
+
+reader.read_config()
+
+class DBContext:
+
+    class QueryTypes:
+        SELECT = 0
+        INSERT = 1
+        UPDATE = 2
+        DELETE = 3
+    
+    def __init__(self):
+        pass
+
+    def __call__(self, dbfunc):
+        @wraps(dbfunc)
+        def wrapper(*args, **kwargs):
+            conn = psycopg2.connect(
+                #dbname=reader.get_param_value('dbname'),
+                user=reader.get_param_value('dbuser'),
+                password=reader.get_param_value('dbpwd'),
+                host=reader.get_param_value('dbhost'),
+                port=reader.get_param_value('dbport')
+            )
+            cursor = conn.cursor()
+            kwargs['cursor'] = cursor
+            res = dbfunc(*args, **kwargs)
+            conn.commit()
+            conn.close()
+            return res
+        return wrapper
+
+class Logger:
+    def __init__(self, type: int):
+        self.type = type
+        logging.basicConfig(
+            level=logging.INFO,
+            filename='dblog.log',
+            filemode='a',
+            format="%(asctime)s %(levelname)s: %(message)s"
+        )
+    
+    def __call__(self, dbfunc):
+        @wraps(dbfunc)
+        def wrapper(*args, **kwargs):
+            try:
+                res = dbfunc(*args, **kwargs)
+
+                if self.type == DBContext.QueryTypes.SELECT:
+                    logging.info(f'SELECT query executed, {len(res)} rows selected')
+                elif self.type == DBContext.QueryTypes.INSERT:
+                    logging.info(f'INSERT query executed, 1 rows changed')
+                elif self.type == DBContext.QueryTypes.UPDATE:
+                    logging.info(f'UPDATE query executed, 1 rows changed')
+                elif self.type == DBContext.QueryTypes.DELETE:
+                    logging.info(f'SELECT query executed, 1 rows changed')
+                
+                return res
+            except Exception as e:
+                logging.error('An error has occurred', exc_info=True)
+                return None
+        return wrapper
