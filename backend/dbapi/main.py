@@ -1,0 +1,38 @@
+from .decorators import DBContext
+from typing import Union
+
+@DBContext()
+def get_user(login: str, pwd: str, cursor=None) -> Union[list, None]:
+    query = f"""select id from users where login = '{login}' and pwd = '{pwd}' """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+@DBContext()
+def create_education_recording(uid: int, cursor=None) -> Union[int, None]:
+    query = f"""INSERT INTO educations (user_id) VALUES ('{uid}')"""
+    cursor.execute(query)
+
+@DBContext()
+def create_additional_education_recording(uid: int, cursor=None) -> Union[int, None]:
+    query = f"""INSERT INTO additional_educations (user_id) VALUES ('{uid}')"""
+    cursor.execute(query)
+
+@DBContext()
+def create_role_recording(uid: int, cursor=None) -> Union[int, None]:
+    query = f"""INSERT INTO roles (user_id) VALUES ('{uid}')"""
+    cursor.execute(query)
+
+@DBContext()
+def create_skill_recording(uid: int, cursor=None) -> Union[int, None]:
+    query = f"""INSERT INTO skills (user_id) VALUES ('{uid}')"""
+    cursor.execute(query)
+
+@DBContext()
+def create_additional_info_recording(uid: int, cursor=None) -> Union[int, None]:
+    query = f"""INSERT INTO additional_info (user_id) VALUES ('{uid}')"""
+    cursor.execute(query)
+
+@DBContext()
+def create_career_preference_recording(uid: int, cursor=None) -> Union[int, None]:
+    query = f"""INSERT INTO career_preferences (user_id) VALUES ('{uid}')"""
+    cursor.execute(query)
