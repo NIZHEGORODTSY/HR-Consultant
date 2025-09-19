@@ -1,5 +1,5 @@
-from back import dbapi
-from back.objects import *
+from _back import dbapi
+from _back.objects import *
 import pandas as pd  # для экспорта
 
 
