@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify, make_response, g
-from functools import wraps
-from config import reader
+from flask import Flask, request, make_response, g
+from _back.config import reader
 from core import verify_user, generate_jwt, create_recording
 import jwt
 
