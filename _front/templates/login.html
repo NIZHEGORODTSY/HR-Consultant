@@ -1,16 +1,48 @@
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8"/>
-    <title>
-        Вход
-    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация | Холдинг Т1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login_style.css') }}">
+    <script src="{{ url_for('static', filename='scripts/login.js') }}" defer></script>
 </head>
 <body>
-    <form method="post" action="/login">
-        <h1>Вход</h1>
-        <input type="text" placeholder="Имя" name="name" />
-        <input type="text" placeholder="Пароль" name="pwd" />
-        <button type="submit">Войти</button>
-        <p style="color: red;">{{ gnev_message }}</p>
-    </form>
+    <!-- Анимированные фоновые элементы -->
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+
+    <div class="container">
+        <div class="logo">
+            <div class="logo-img">Т1</div>
+            <h1>Холдинг Т1</h1>
+            <p>Войдите в вашу учетную запись</p>
+        </div>
+
+        <form id="loginForm" method="post" action="/login">
+            <div class="form-group">
+                <label for="username">Логин</label>
+                <input type="text" id="username" class="form-control" placeholder="Введите ваш логин" required name="name">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" class="form-control" placeholder="Введите ваш пароль" required name="pwd">
+            </div>
+
+            <button type="submit" class="btn">Войти</button>
+        </form>
+
+        <div class="links">
+            <a href="#">Забыли пароль?</a>
+            <a href="#">Помощь</a>
+        </div>
+
+        <div class="footer">
+            <p>© 2023 Холдинг Т1. Все права защищены.</p>
+        </div>
+    </div>
 </body>
+</html>

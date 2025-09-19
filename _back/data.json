@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Aboba",
+            "pwd": "1234"
+        },
+        {
+            "id": 2,
+            "name": "Azat",
+            "pwd": "5678"
+        },
+        {
+            "id": 3,
+            "name": "Qwerty",
+            "pwd": "qwertz"
+        }
+    ]
+}
