@@ -1,2 +1,4 @@
 .vscode/
 config/config.yaml
+.idea/
+.__pycahe__/
