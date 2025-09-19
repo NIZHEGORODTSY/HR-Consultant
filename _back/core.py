@@ -5,11 +5,13 @@ import jwt
 
 reader.read_config()
 
+
 def verify_user(login: str, pwd: str) -> int:
     res = get_user(login, pwd)
     if len(res) == 0:
         return -1
     return res[0][0]
+
 
 def create_recording(category: int, id: int):
     if category == 0:
@@ -34,5 +36,6 @@ def generate_jwt(id: int) -> str:
 
     token = jwt.encode(payload, reader.get_param_value('jwt-key'), algorithm='HS256')
     return token
+
 
 create_recording(0, 1)

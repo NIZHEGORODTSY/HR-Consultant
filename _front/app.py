@@ -19,12 +19,17 @@ def f():
     response = requests.get('http://127.0.0.1:5000/id', cookies=req_cookies)
     if response.status_code == 401:
         return app.redirect(f'/login')
-    return response.json()
+    return app.redirect(f'/profile')
 
 
 @app.route('/login', methods=['GET'])
 def login_view():
     return render_template('login.html', gnev_message='')
+
+
+@app.route('/profile', methods=['GET'])
+def profile_view():
+    return render_template('profile.html')
 
 
 @app.route('/login', methods=['POST'])

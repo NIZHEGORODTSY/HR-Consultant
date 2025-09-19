@@ -7,6 +7,7 @@ reader.read_config()
 
 app = Flask(__name__)
 
+
 @app.before_request
 def jwt_required():
     if request.path not in ['/login', '/reguster']:
@@ -16,6 +17,7 @@ def jwt_required():
             g.uid = decoded['uid']
         except:
             return make_response({}, 401)
+
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -29,6 +31,7 @@ def login():
     resp.set_cookie(key='access_token', value=generate_jwt(id), max_age=None)
     return resp
 
+
 @app.route('/create', methods=['POST'])
 def create():
     # {
@@ -38,5 +41,3 @@ def create():
     category = data.get('category')
     create_recording(category, g.uid)
     return make_response({}, 200)
-
-    
