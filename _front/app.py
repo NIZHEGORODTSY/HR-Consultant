@@ -16,7 +16,7 @@ def f():
     req_cookies = {
         'access_token': flask_request.cookies['access_token']
     }
-    response = requests.get('http://192.168.1.78:5000/id', cookies=req_cookies)
+    response = requests.get('http://127.0.0.1:5000/id', cookies=req_cookies)
     if response.status_code == 401:
         return app.redirect(f'/login')
     return response.json()
@@ -33,7 +33,7 @@ def login_post():
     pwd = flask_request.form['pwd']
 
     response = requests.post(
-        'http://192.168.1.78:5000/login',
+        'http://127.0.0.1:5000/login',
         json={
             'name': name,
             'pwd': pwd

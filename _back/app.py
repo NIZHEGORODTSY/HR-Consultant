@@ -10,7 +10,7 @@ def jwt_required():
     if request.path not in ['/login', '/reguster']:
         try:
             token = request.cookies['access_token']
-            decoded = jwt.decode(token, core.KEY, algorithms=["HS256"])
+            decoded = jwt.decode(token, core_jwt.KEY, algorithms=["HS256"])
             g.uid = decoded['uid']
         except:
             return make_response({}, 401)
@@ -21,24 +21,10 @@ def login():
     data = request.json
     name = data.get('name')
     pwd = data.get('pwd')
-    id = core.verify_user(name, pwd)
+    id = core_jwt.verify_user(name, pwd)
     if id != -1:
         resp = make_response({}, 200)
-        resp.set_cookie(key='access_token', value=core.generate_jwt(id), max_age=None)
-        return resp
-    else:
-        return make_response({}, 401)
-
-
-@app.route('/register', methods=['POST'])
-def register():
-    data = request.json
-    name = data.get('name')
-    pwd = data.get('pwd')
-    id = core.add_user(name, pwd)
-    if id != -1:
-        resp = make_response({}, 200)
-        resp.set_cookie(key='access_token', value=core.generate_jwt(id), max_age=None)
+        resp.set_cookie(key='access_token', value=core_jwt.generate_jwt(id), max_age=None)
         return resp
     else:
         return make_response({}, 401)

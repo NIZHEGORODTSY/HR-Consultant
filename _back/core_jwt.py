@@ -10,7 +10,7 @@ def verify_user(uname: str, pwd: str) -> int:
     Проверяет наличие пользователя в базе данных и возвращает его id  
     Если пользователь не найден, возвращает -1
     """
-    with open('JWT-Auth/_back/data.json', 'r') as f:
+    with open('D:\Phyton\HR_CONSULTANT\_back\data.json', 'r') as f:
         data = json.load(f)
     res = -1
     for user in data['users']:
@@ -21,7 +21,7 @@ def verify_user(uname: str, pwd: str) -> int:
 
 
 def add_user(uname: str, pwd: str) -> int:
-    with open('JWT-Auth/_back/data.json', 'r') as f:
+    with open('D:\Phyton\HR_CONSULTANT\_back\data.json', 'r') as f:
         data = json.load(f)
 
     max_id = 0
@@ -36,7 +36,7 @@ def add_user(uname: str, pwd: str) -> int:
         'pwd': pwd
     })
 
-    with open('JWT-Auth/_back/data.json', 'w') as f:
+    with open('D:\Phyton\HR_CONSULTANT\_back\data.json', 'w') as f:
         json.dump(data, f)
     return max_id + 1
 
