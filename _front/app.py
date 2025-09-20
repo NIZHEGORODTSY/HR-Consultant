@@ -2,6 +2,7 @@ from flask import Flask, request as flask_request, jsonify, make_response, rende
 import requests
 import jwt
 import core
+from _MODELS.generate_prompt import get_final_prompt
 
 app = Flask(__name__)
 
@@ -52,7 +53,8 @@ def show_chat():
     userinfo = core.get_user_info(flask_request.cookies.get('access_token'))
     token = flask_request.cookies['access_token']
     uid, name = core.decode_jwt(token)
-    return render_template('chat.html')
+    prompt = get_final_prompt(name)
+    return prompt
 
 
 @app.route('/profile', methods=['GET'])
