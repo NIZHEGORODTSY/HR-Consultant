@@ -10,6 +10,12 @@ def get_user(login: str, pwd: str, cursor=None) -> Union[list, None]:
 
 
 @DBContext()
+def get_all_users(cursor=None) -> list:
+    query = f"""select id, full_name from users"""
+    cursor.execute(query)
+    return cursor.fetchall()
+
+@DBContext()
 def create_education_recording(uid: int, cursor=None) -> Union[int, None]:
     query = f"""INSERT INTO educations (user_id) VALUES ('{uid}')"""
     cursor.execute(query)
@@ -53,13 +59,22 @@ def get_category_info(table: str, uid: int, cursor=None):
 
 
 @DBContext()
-def update_recording(table: str, values: dict[str, any], cursor=None) -> None:
+def update_recording(user_id: int, category: str, record_id: str, values: dict[str, any], cursor=None) -> None:
     body = ''
     for key, value in values.items():
         if isinstance(value, str):
             body += f"{key} = '{value}',"
+        elif isinstance(value, list):
+            inner = [f'\"{v}\"' for v in value][:-1]
+            inner = ''
+            for v in value:
+                inner += f'\"{v}\",'
+            body += f"{key} = '{{{inner[:-1]}}}',"
         else:
             body += f"{key} = {value},"
     body = body[:-1]
-    query = f"""UPDATE {table} SET {body}"""
+    if record_id:
+        query = f"""UPDATE {category} SET {body} WHERE id = {record_id}"""
+    else:
+        query = f"""UPDATE {category} SET {body} WHERE user_id = {user_id}"""
     cursor.execute(query)

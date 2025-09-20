@@ -1,6 +1,6 @@
-dbname: postgres
-dbuser: user
-dbpwd: verystrongpassword
-dbhost: localhost
-dbport: 5455
+dbname: main
+dbuser: postgres
+dbpwd: 1234
+dbhost: 192.168.0.101
+dbport: 5432
 jwt-key: ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb
