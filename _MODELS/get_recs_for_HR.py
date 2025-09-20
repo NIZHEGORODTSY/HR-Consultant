@@ -1,0 +1,143 @@
+import json
+from openai import OpenAI
+from _MODELS import reader
+from datetime import datetime
+
+
+def get_rec_for_HR(uid: int):
+    # Данные профиля
+    profile_data = {
+        "educations": {
+            "1": {
+                "user_id": 1,
+                "university": "Санкт-Петербургский политехнический университет Петра Великого",
+                "level": "Бакалавр",
+                "spec": "Программная инженерия",
+                "grad_year": 2018,
+                "diploma": "диплом_ИТ_2018.pdf"
+            },
+            "2": {
+                "user_id": 1,
+                "university": "НИУ ВШЭ",
+                "level": "Магистр",
+                "spec": "Анализ данных и искусственный интеллект",
+                "grad_year": 2020,
+                "diploma": "диплом_магистра_2020.pdf"
+            }
+        },
+        "additional_educations": {
+            "1": {
+                "user_id": 1,
+                "name": "AWS Certified Solutions Architect",
+                "company": "Amazon Web Services",
+                "issued": "2021-06-15",
+                "hours_amount": 40,
+                "diploma": "aws_certificate_2021.pdf"
+            },
+            "2": {
+                "user_id": 1,
+                "name": "Курс по машинному обучению",
+                "company": "Coursera",
+                "issued": "2022-03-10",
+                "hours_amount": 60,
+                "diploma": "ml_course_certificate.pdf"
+            }
+        },
+        "roles": {
+            "1": {
+                "user_id": 1,
+                "role": "Senior Backend Developer",
+                "start_date": "2021-04-01",
+                "end_date": 'null'
+            },
+            "2": {
+                "user_id": 1,
+                "role": "Middle Python Developer",
+                "start_date": "2020-01-15",
+                "end_date": "2021-03-31"
+            }
+        },
+        "skills": {
+            "1": "Глубокое знание языка Python, включая асинхронное программирование, декораторы, контекстные менеджеры. Опыт разработки высоконагруженных приложений с использованием asyncio и aiohttp. Знание современных практик кодирования и паттернов проектирования.",
+            "2": "Опыт разработки полного цикла на Django и Django REST Framework. Создание REST API, работа с ORM, миграциями, аутентификацией и авторизацией. Оптимизация производительности запросов к базе данных и кэширование с помощью Redis.",
+            "3": "Проектирование и оптимизация сложных схем баз данных. Написание эффективных SQL-запросов, использование индексов, представлений, хранимых процедур и триггеров. Опыт работы с репликацией и обеспечением целостности данных.",
+            "4": "Создание и настройка Docker-контейнеров для приложений. Написание Dockerfile, работа с Docker Compose для оркестрации многоконтейнерных приложений. Понимание лучших практик создания образов и управления контейнерами.",
+            "5": "Базовые знания развертывания и управления приложениями в Kubernetes. Опыт работы с Pod'ами, Deployments, Services и ConfigMaps. Понимание принципов работы кластера и основ мониторинга приложений в K8s."
+        },
+        "additional_info": {
+            "languages": [
+                {
+                    "language": "Английский",
+                    "level": "B2"
+                },
+                {
+                    "language": "Русский",
+                    "level": "Родной"
+                }
+            ],
+            "projects": [
+                {
+                    "name": "Разработка микросервисной архитектуры",
+                    "description": "Lead developer проекта по миграции монолита на микросервисы"
+                }
+            ]
+        },
+        "career_preferences": {
+            "desired_position": "Tech Lead",
+            "preferred_technologies": ["Python", "Go", "Kubernetes"],
+            "work_format": "Гибридный",
+            "relocation": "Рассматриваю",
+            "expected_salary": 350000
+        }
+    } #получем данные о пользователе по uid
+
+    # Настройка клиента OpenAI
+    reader.read_config()
+    API_KEY = reader.get_param_value('api-key')
+    client = OpenAI(api_key=API_KEY, base_url="https://llm.t1v.scibox.tech/v1")
+
+    prompt = f"""Ты — опытный HR-аналитик и карьерный консультант. Проанализируй профиль разработчика и предоставь анализ В СТРОГОМ ФОРМАТЕ JSON без каких-либо пояснений до или после.
+    
+    Профиль кандидата:
+    {json.dumps(profile_data, ensure_ascii=False, indent=2)}
+    
+    Проанализируй следующие аспекты:
+    1. **Рекомендуемые роли**: Какие 2-3 наиболее подходящие должности для этого кандидата на основе его опыта, образования и навыков.
+    2. **Пробелы в навыках**: Какие ключевые навыки отсутствуют или слабо развиты для целевой позиции (3-4 пункта).
+    3. **Рекомендуемые курсы**: Конкретные курсы/сертификации для закрытия пробелов в навыках (2-3 рекомендации).
+    4. **Мобильность**: Оценка готовности к релокации ("Низкая", "Средняя", "Высокая") на основе предпочтений.
+    5. **Последняя активность**: Дата последнего обновления профиля (используй текущую дату).
+    
+    Верни ответ ТОЛЬКО в формате JSON с такой структурой:
+    {{
+        "recommended_roles": "строка с перечислением через запятую",
+        "skills_gap": "строка с перечислением через запятую",
+        "recommended_courses": "строка с перечислением через запятую",
+        "mobility_score": "Низкая/Средняя/Высокая",
+        "last_activities": "Обновлен профиль ГГГГ-ММ-ДД"
+    }}"""
+    # Отправка запроса к модели
+    try:
+        response = client.chat.completions.create(
+            model="Qwen2.5-72B-Instruct-AWQ",
+            messages=[
+                {"role": "system",
+                 "content": "Ты помогаешь HR-специалистам анализировать профили кандидатов. Отвечай только в формате JSON."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.2,  # Низкая температура для более детерминированного ответа
+            response_format={"type": "json_object"}  # Важно: просим явно JSON формат
+        )
+
+        # Извлечение и парсинг ответа
+        result = response.choices[0].message.content
+        analysis_data = json.loads(result)
+
+        print("Анализ профиля:")
+        return json.dumps(analysis_data, ensure_ascii=False, indent=2)
+
+    except Exception as e:
+        print(f"Ошибка при выполнении запроса: {e}")
+
+
+print(get_rec_for_HR(1))
