@@ -9,6 +9,7 @@ def build_user_context(user_id: int, analysis_results: dict) -> dict:
     # add_education = get_additional_education(user_id)
 
     # Прочитать весь файл как одну строку
+    data = get_all_info(user_id)
 
     user_fullname = 'Иван Михайлович'  # Ваша функция к БД
     skills = ['мужчина']
@@ -54,11 +55,12 @@ def build_user_context(user_id: int, analysis_results: dict) -> dict:
     return context
 
 
-with open('../_MODELS/prompt.txt', 'r', encoding='utf-8') as file:
-    prompt_template = file.read()
-analysis_data = '000'
+def get_final_prompt():
+    with open('../_MODELS/prompt.txt', 'r', encoding='utf-8') as file:
+        prompt_template = file.read()
+    analysis_data = '000'
 
-# Использование
+    # Использование
 
-user_context = build_user_context(user_id=123, analysis_results=analysis_data)
-final_prompt = prompt_template.format(**user_context)
+    user_context = build_user_context(user_id=1, analysis_results=analysis_data)
+    final_prompt = prompt_template.format(**user_context)

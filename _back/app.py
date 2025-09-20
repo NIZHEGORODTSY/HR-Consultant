@@ -1,5 +1,5 @@
 from flask import Flask, request, make_response, g
-from _back.config import reader
+from config import reader
 from core import verify_user, generate_jwt, create_recording, get_all_info
 import jwt
 
