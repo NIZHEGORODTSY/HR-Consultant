@@ -3,7 +3,7 @@ from typing import Union
 
 @DBContext()
 def get_user(login: str, pwd: str, cursor=None) -> Union[list, None]:
-    query = f"""select id from users where login = '{login}' and pwd = '{pwd}' """
+    query = f"""select id, full_name from users where login = '{login}' and pwd = '{pwd}' """
     cursor.execute(query)
     return cursor.fetchall()
 
@@ -36,6 +36,12 @@ def create_additional_info_recording(uid: int, cursor=None) -> Union[int, None]:
 def create_career_preference_recording(uid: int, cursor=None) -> Union[int, None]:
     query = f"""INSERT INTO career_preferences (user_id) VALUES ('{uid}')"""
     cursor.execute(query)
+
+@DBContext()
+def get_category_info(table: str, uid: int, cursor=None):
+    query = f"""select * from {table} where user_id = {uid}"""
+    cursor.execute(query)
+    return cursor.fetchall()
 
 @DBContext()
 def update_recording(table: str, values: dict[str, any], cursor=None) -> None:

@@ -1,5 +1,5 @@
 from flask import Flask, request, make_response, g
-from _back.config import reader
+from config import reader
 from core import verify_user, generate_jwt, create_recording
 import jwt
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.before_request
 def jwt_required():
-    if request.path not in ['/login', '/reguster']:
+    if request.path not in ['/login']:
         try:
             token = request.cookies['access_token']
             decoded = jwt.decode(token, reader.get_param_value("jwt-key"), algorithms=["HS256"])
@@ -24,12 +24,11 @@ def login():
     data = request.json
     login = data.get('login')
     pwd = data.get('pwd')
-    id = verify_user(login, pwd)
-    name = 'static name'
+    id, fullname = verify_user(login, pwd)
     if id == -1:
         return make_response({}, 401)
     resp = make_response({}, 200)
-    resp.set_cookie(key='access_token', value=generate_jwt(id, name), max_age=None)
+    resp.set_cookie(key='access_token', value=generate_jwt(id, fullname), max_age=None)
     return resp
 
 
@@ -47,3 +46,5 @@ def create():
 @app.route('/id', methods=['POST'])
 def dummy():
     return make_response({}, 200)
+
+app.run(debug=True, port=5000, host='0.0.0.0')

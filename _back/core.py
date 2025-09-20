@@ -7,11 +7,11 @@ reader.read_config()
 
 CATEGORIES = ['educations', 'additional_educations', 'roles', 'skills', 'additional_info', 'career_preferences']
 
-def verify_user(login: str, pwd: str) -> int:
+def verify_user(login: str, pwd: str) -> tuple[int, Union[str, None]]:
     res = get_user(login, pwd)
     if len(res) == 0:
-        return -1
-    return res[0][0]
+        return -1, None
+    return res[0][0], res[0][1]
 
 def create_recording(category: str, id: int):
     if category == 'educations':
