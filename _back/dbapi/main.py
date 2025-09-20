@@ -8,6 +8,12 @@ def get_user(login: str, pwd: str, cursor=None) -> Union[list, None]:
     return cursor.fetchall()
 
 @DBContext()
+def get_all_users(cursor=None) -> list:
+    query = f"""select id, full_name from users"""
+    cursor.execute(query)
+    return cursor.fetchall()
+
+@DBContext()
 def create_education_recording(uid: int, cursor=None) -> Union[int, None]:
     query = f"""INSERT INTO educations (user_id) VALUES ('{uid}')"""
     cursor.execute(query)
