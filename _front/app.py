@@ -20,12 +20,17 @@ def check_cookies():
 def dum():
     return app.redirect('/profile')
 
+
+@app.route('/chat')
+def show_chat():
+    return render_template('chat.html')
+
+
 @app.route('/authreq_resource', methods=['GET'])
 def f():
     req_cookies = {
         'access_token': flask_request.cookies['access_token']
     }
-    response = requests.get('http://127.0.0.1:5000/id', cookies=req_cookies)
     if response.status_code == 401:
         return app.redirect(f'/login')
     return app.redirect(f'/profile')
@@ -35,8 +40,10 @@ def f():
 def profile_view():
     # token = flask_request.cookies.get('acess_token')
     fullname = g.name
-    fullname = '0'
-    shortname = '1'
+    lst = str(fullname).split()
+    shortname = ''
+    for word in lst:
+        shortname += word[0].capitalize()
     position = 'god'
     department = 'Yandex'
     response = requests.get(
@@ -45,9 +52,11 @@ def profile_view():
     data = response.json()
     return render_template('profile.html', fullname=fullname, shortname=shortname, position=position, department=department)
 
+
 @app.route('/login', methods=['GET'])
 def login_view():
     return render_template('login.html')
+
 
 @app.route('/login', methods=['POST'])
 def login_post():
@@ -60,7 +69,7 @@ def login_post():
             'login': name,
             'pwd': pwd
         }
-    )    
+    )
     if response.status_code == 401:
         return render_template('login.html', gnev_message='Неверное имя пользователя или пароль!')
     else:

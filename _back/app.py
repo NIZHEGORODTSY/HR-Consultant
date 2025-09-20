@@ -42,13 +42,12 @@ def create():
     create_recording(category, g.uid)
     return make_response({}, 200)
 
-@app.route('/info', methods = ['GET'])
+
+@app.route('/info', methods=['GET'])
 def get_user_info():
     id = g.uid
     res = get_all_info(id)
     return make_response(res, 200)
-
-    
 
 
 @app.route('/id', methods=['POST'])

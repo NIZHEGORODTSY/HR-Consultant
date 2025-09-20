@@ -1,11 +1,12 @@
 import psycopg2
 from functools import wraps
-from config import reader
+from _back.config import reader
 
 reader.read_config()
 
+
 class DBContext:
-    
+
     def __init__(self):
         pass
 
@@ -25,4 +26,5 @@ class DBContext:
             conn.commit()
             conn.close()
             return res
+
         return wrapper
