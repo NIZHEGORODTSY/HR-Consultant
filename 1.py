@@ -1,20 +1,16 @@
-import psycopg2
+import subprocess
+import time
 
-conn = psycopg2.connect(
-    dbname='main',
-    user='postgres',
-    password='1234',
-    host='192.168.0.101',
-    port='5432'
-)
+# Список программ для запуска
+programs = [
+    "python _front/app.py",
+    "python _back/app.py"
+]
 
-cursor = conn.cursor()
+processes = []
 
-query = f"""SELECT * FROM users"""
-cursor.execute(query)
+# Запуск всех программ
+for cmd in programs:
+    processes.append(subprocess.Popen(cmd, shell=True))
 
-res = cursor.fetchall()
-
-print(res)
-
-conn.close()
+# Ожидание завершения всех процессов
