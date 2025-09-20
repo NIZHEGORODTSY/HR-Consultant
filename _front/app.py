@@ -66,7 +66,7 @@ def profile_view():
     position = 'god'
     department = 'Yandex'
     _data = core.get_user_info(flask_request.cookies.get('access_token'))
-    return render_template('profile.html', data=_data, fullname=name, shortname=shortname, position=position,
+    return render_template('profile.html', data=_data, fullname=name, shortname=shortname[:2], position=_data,
                            department=department)
 
 
