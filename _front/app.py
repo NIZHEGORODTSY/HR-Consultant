@@ -2,7 +2,7 @@ from flask import Flask, request as flask_request, jsonify, make_response, rende
 import requests
 import jwt
 import core
-from _MODELS.generate_prompt import get_final_prompt
+from .._MODELS.generate_prompt import get_final_prompt
 
 app = Flask(__name__)
 
