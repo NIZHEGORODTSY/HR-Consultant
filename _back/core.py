@@ -98,8 +98,6 @@ def get_all_info(uid: int) -> dict:
     return res
 
 
-
-
 def generate_jwt(id: int, name : int) -> str:
     payload = {
         'uid': id,
@@ -109,4 +107,3 @@ def generate_jwt(id: int, name : int) -> str:
 
     token = jwt.encode(payload, reader.get_param_value('jwt-key'), algorithm='HS256')
     return token
-
