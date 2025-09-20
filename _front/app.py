@@ -39,7 +39,7 @@ def show_projects():
 
 @app.route('/exit')
 def show_projects():
-    return render_template('calendar.html')
+    return app.redirect('/login')
 
 
 @app.route('/edit_profile')
