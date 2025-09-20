@@ -58,7 +58,7 @@ def show_chat():
 @app.route('/profile', methods=['GET'])
 def profile_view():
     # token = flask_request.cookies.get('acess_token')
-    fullname = 'g.name'
+    fullname = g.name
     lst = str(fullname).split()
     shortname = ''
     for word in lst:
