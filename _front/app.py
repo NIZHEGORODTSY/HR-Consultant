@@ -28,15 +28,6 @@ def show_chat():
     return render_template('chat.html')
 
 
-@app.route('/authreq_resource', methods=['GET'])
-def f():
-    req_cookies = {
-        'access_token': flask_request.cookies['access_token']
-    }
-    if response.status_code == 401:
-        return app.redirect(f'/login')
-    return app.redirect(f'/profile')
-
 
 @app.route('/profile', methods=['GET'])
 def profile_view():
