@@ -36,3 +36,15 @@ def create_additional_info_recording(uid: int, cursor=None) -> Union[int, None]:
 def create_career_preference_recording(uid: int, cursor=None) -> Union[int, None]:
     query = f"""INSERT INTO career_preferences (user_id) VALUES ('{uid}')"""
     cursor.execute(query)
+
+@DBContext()
+def update_recording(table: str, values: dict[str, any], cursor=None) -> None:
+    body = ''
+    for key, value in values.items():
+        if isinstance(value, str):
+            body += f"{key} = '{value}',"
+        else:
+            body += f"{key} = {value},"
+    body = body[:-1]
+    query = f"""UPDATE {table} SET {body}"""
+    cursor.execute(query)
