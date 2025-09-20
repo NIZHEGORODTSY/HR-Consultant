@@ -32,9 +32,9 @@ def show_tasks():
     return render_template('tasks.html')
 
 
-@app.route('/calendar')
-def show_calendar():
-    return render_template('calendar.html')
+@app.route('/progress')
+def show_progress():
+    return render_template('progress.html')
 
 
 @app.route('/exit')

@@ -9,335 +9,337 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Анимированные фоновые элементы -->
-    <div class="bg-circle"></div>
-    <div class="bg-circle"></div>
-    <div class="bg-circle"></div>
+<!-- Анимированные фоновые элементы -->
+<div class="bg-circle"></div>
+<div class="bg-circle"></div>
+<div class="bg-circle"></div>
 
-    <!-- Header -->
-    <div class="header">
-        <div class="logo">
-            <div class="logo-img">Т1</div>
-            <div class="logo-text">Холдинг Т1</div>
-        </div>
-
-        <div class="user-menu">
-            <div class="user-avatar">ИИ</div>
-        </div>
+<!-- Header -->
+<div class="header">
+    <div class="logo">
+        <div class="logo-img">Т1</div>
+        <div class="logo-text">Холдинг Т1</div>
     </div>
 
-    <!-- Main content -->
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="user-info">
-                <div class="user-info-avatar">ИИ</div>
-                <div class="user-info-name">Иванов Иван</div>
-                <div class="user-info-position">Менеджер проектов</div>
-                <div class="user-info-department">Департамент разработки</div>
-            </div>
+    <div class="user-menu">
+        <div class="user-avatar">ИИ</div>
+    </div>
+</div>
 
-            <ul class="nav-menu">
-                <li><a href="profile.html"><i class="fas fa-user"></i> Мой профиль</a></li>
-                <li><a href="projects.html" class="active"><i class="fas fa-briefcase"></i> Мои проекты</a></li>
-                <li><a href="/tasks"><i class="fas fa-tasks"></i> Задачи</a></li>
-                <li><a href="#"><i class="fas fa-calendar"></i> Календарь</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Настройки</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
-            </ul>
+<!-- Main content -->
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="user-info">
+            <div class="user-info-avatar">{{shortname}}</div>
+            <div class="user-info-name">{{fullname}}</div>
         </div>
 
-        <!-- Projects content -->
-        <div class="projects-content">
-            <div class="projects-header">
-                <h1 class="projects-title">Мои проекты</h1>
-                <button class="create-project-btn">
-                    <i class="fas fa-plus"></i> Новый проект
-                </button>
-            </div>
-
-            <!-- Filters and search -->
-            <div class="projects-filters">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Поиск проектов..." class="search-input">
-                </div>
-
-                <div class="filter-buttons">
-                    <button class="filter-btn active">Все</button>
-                    <button class="filter-btn">Активные</button>
-                    <button class="filter-btn">Завершенные</button>
-                    <button class="filter-btn">Мои</button>
-                </div>
-
-                <div class="sort-select">
-                    <select>
-                        <option>Сначала новые</option>
-                        <option>Сначала старые</option>
-                        <option>По названию</option>
-                        <option>По статусу</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Projects grid -->
-            <div class="projects-grid">
-                <!-- Project card 1 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-status status-active">Активный</span>
-                        <div class="project-actions">
-                            <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
-                        </div>
-                    </div>
-
-                    <h3 class="project-title">Разработка новой CRM системы</h3>
-                    <p class="project-description">Создание современной CRM платформы для отдела продаж с интеграцией с 1С</p>
-
-                    <div class="project-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 75%"></div>
-                        </div>
-                        <span class="progress-text">75% завершено</span>
-                    </div>
-
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>25.12.2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-users"></i>
-                            <span>8 участников</span>
-                        </div>
-                    </div>
-
-                    <div class="project-team">
-                        <div class="team-avatars">
-                            <div class="team-avatar">АС</div>
-                            <div class="team-avatar">МП</div>
-                            <div class="team-avatar">ЕК</div>
-                            <div class="team-avatar">+5</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project card 2 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-status status-completed">Завершен</span>
-                        <div class="project-actions">
-                            <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
-                        </div>
-                    </div>
-
-                    <h3 class="project-title">Мобильное приложение Т1 Бизнес</h3>
-                    <p class="project-description">Разработка мобильного приложения для iOS и Android с функциями онлайн-банкинга</p>
-
-                    <div class="project-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 100%"></div>
-                        </div>
-                        <span class="progress-text">100% завершено</span>
-                    </div>
-
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>15.10.2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-users"></i>
-                            <span>12 участников</span>
-                        </div>
-                    </div>
-
-                    <div class="project-team">
-                        <div class="team-avatars">
-                            <div class="team-avatar">ДС</div>
-                            <div class="team-avatar">ОЛ</div>
-                            <div class="team-avatar">ИМ</div>
-                            <div class="team-avatar">+9</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project card 3 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-status status-planning">Планирование</span>
-                        <div class="project-actions">
-                            <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
-                        </div>
-                    </div>
-
-                    <h3 class="project-title">Внедрение BI-системы</h3>
-                    <p class="project-description">Внедрение системы бизнес-аналитики для анализа показателей эффективности</p>
-
-                    <div class="project-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 15%"></div>
-                        </div>
-                        <span class="progress-text">15% завершено</span>
-                    </div>
-
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>15.02.2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-users"></i>
-                            <span>6 участников</span>
-                        </div>
-                    </div>
-
-                    <div class="project-team">
-                        <div class="team-avatars">
-                            <div class="team-avatar">ПР</div>
-                            <div class="team-avatar">СВ</div>
-                            <div class="team-avatar">АК</div>
-                            <div class="team-avatar">+3</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project card 4 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-status status-active">Активный</span>
-                        <div class="project-actions">
-                            <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
-                        </div>
-                    </div>
-
-                    <h3 class="project-title">Обновление корпоративного портала</h3>
-                    <p class="project-description">Редизайн и улучшение функциональности внутреннего корпоративного портала</p>
-
-                    <div class="project-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 60%"></div>
-                        </div>
-                        <span class="progress-text">60% завершено</span>
-                    </div>
-
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>10.01.2024</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-users"></i>
-                            <span>5 участников</span>
-                        </div>
-                    </div>
-
-                    <div class="project-team">
-                        <div class="team-avatars">
-                            <div class="team-avatar">НТ</div>
-                            <div class="team-avatar">ВМ</div>
-                            <div class="team-avatar">ЛБ</div>
-                            <div class="team-avatar">+2</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project card 5 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-status status-onhold">На паузе</span>
-                        <div class="project-actions">
-                            <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
-                        </div>
-                    </div>
-
-                    <h3 class="project-title">Миграция на новую версию 1С</h3>
-                    <p class="project-description">Обновление и миграция баз данных 1С на новую платформу</p>
-
-                    <div class="project-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 30%"></div>
-                        </div>
-                        <span class="progress-text">30% завершено</span>
-                    </div>
-
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>05.11.2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-users"></i>
-                            <span>4 участника</span>
-                        </div>
-                    </div>
-
-                    <div class="project-team">
-                        <div class="team-avatars">
-                            <div class="team-avatar">КД</div>
-                            <div class="team-avatar">ТС</div>
-                            <div class="team-avatar">РП</div>
-                            <div class="team-avatar">+1</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project card 6 -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <span class="project-status status-active">Активный</span>
-                        <div class="project-actions">
-                            <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
-                        </div>
-                    </div>
-
-                    <h3 class="project-title">Внедрение системы электронного документооборота</h3>
-                    <p class="project-description">Внедрение СЭД для автоматизации workflow и документооборота</p>
-
-                    <div class="project-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 45%"></div>
-                        </div>
-                        <span class="progress-text">45% завершено</span>
-                    </div>
-
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <i class="fas fa-calendar"></i>
-                            <span>20.12.2023</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-users"></i>
-                            <span>7 участников</span>
-                        </div>
-                    </div>
-
-                    <div class="project-team">
-                        <div class="team-avatars">
-                            <div class="team-avatar">ЕС</div>
-                            <div class="team-avatar">МЛ</div>
-                            <div class="team-avatar">ДК</div>
-                            <div class="team-avatar">+4</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pagination -->
-            <div class="pagination">
-                <button class="pagination-btn disabled">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="pagination-btn active">1</button>
-                <button class="pagination-btn">2</button>
-                <button class="pagination-btn">3</button>
-                <button class="pagination-btn">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
+        <ul class="nav-menu">
+            <li><a href="/profile" class="active"><i class="fas fa-user"></i> Мой профиль</a></li>
+            <li><a href="/projects"><i class="fas fa-briefcase"></i> Мои проекты</a></li>
+            <li><a href="/tasks"><i class="fas fa-tasks"></i> Задачи</a></li>
+            <li><a href="/calendar"><i class="fas fa-calendar"></i> Календарь</a></li>
+            <li><a href="/chat" class="active"><i class="fas fa-comment-alt"></i> ИИ-консультант</a></li>
+            <li><a href="/exit"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+        </ul>
     </div>
 
-    <script src="projects.js"></script>
+    <!-- Projects content -->
+    <div class="projects-content">
+        <div class="projects-header">
+            <h1 class="projects-title">Мои проекты</h1>
+            <button class="create-project-btn">
+                <i class="fas fa-plus"></i> Новый проект
+            </button>
+        </div>
+
+        <!-- Filters and search -->
+        <div class="projects-filters">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Поиск проектов..." class="search-input">
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active">Все</button>
+                <button class="filter-btn">Активные</button>
+                <button class="filter-btn">Завершенные</button>
+                <button class="filter-btn">Мои</button>
+            </div>
+
+            <div class="sort-select">
+                <select>
+                    <option>Сначала новые</option>
+                    <option>Сначала старые</option>
+                    <option>По названию</option>
+                    <option>По статусу</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Projects grid -->
+        <div class="projects-grid">
+            <!-- Project card 1 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-status status-active">Активный</span>
+                    <div class="project-actions">
+                        <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+
+                <h3 class="project-title">Разработка новой CRM системы</h3>
+                <p class="project-description">Создание современной CRM платформы для отдела продаж с интеграцией с
+                    1С</p>
+
+                <div class="project-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <span class="progress-text">75% завершено</span>
+                </div>
+
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>25.12.2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>8 участников</span>
+                    </div>
+                </div>
+
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <div class="team-avatar">АС</div>
+                        <div class="team-avatar">МП</div>
+                        <div class="team-avatar">ЕК</div>
+                        <div class="team-avatar">+5</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project card 2 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-status status-completed">Завершен</span>
+                    <div class="project-actions">
+                        <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+
+                <h3 class="project-title">Мобильное приложение Т1 Бизнес</h3>
+                <p class="project-description">Разработка мобильного приложения для iOS и Android с функциями
+                    онлайн-банкинга</p>
+
+                <div class="project-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <span class="progress-text">100% завершено</span>
+                </div>
+
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>15.10.2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>12 участников</span>
+                    </div>
+                </div>
+
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <div class="team-avatar">ДС</div>
+                        <div class="team-avatar">ОЛ</div>
+                        <div class="team-avatar">ИМ</div>
+                        <div class="team-avatar">+9</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project card 3 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-status status-planning">Планирование</span>
+                    <div class="project-actions">
+                        <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+
+                <h3 class="project-title">Внедрение BI-системы</h3>
+                <p class="project-description">Внедрение системы бизнес-аналитики для анализа показателей
+                    эффективности</p>
+
+                <div class="project-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 15%"></div>
+                    </div>
+                    <span class="progress-text">15% завершено</span>
+                </div>
+
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>15.02.2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>6 участников</span>
+                    </div>
+                </div>
+
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <div class="team-avatar">ПР</div>
+                        <div class="team-avatar">СВ</div>
+                        <div class="team-avatar">АК</div>
+                        <div class="team-avatar">+3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project card 4 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-status status-active">Активный</span>
+                    <div class="project-actions">
+                        <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+
+                <h3 class="project-title">Обновление корпоративного портала</h3>
+                <p class="project-description">Редизайн и улучшение функциональности внутреннего корпоративного
+                    портала</p>
+
+                <div class="project-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 60%"></div>
+                    </div>
+                    <span class="progress-text">60% завершено</span>
+                </div>
+
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>10.01.2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>5 участников</span>
+                    </div>
+                </div>
+
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <div class="team-avatar">НТ</div>
+                        <div class="team-avatar">ВМ</div>
+                        <div class="team-avatar">ЛБ</div>
+                        <div class="team-avatar">+2</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project card 5 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-status status-onhold">На паузе</span>
+                    <div class="project-actions">
+                        <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+
+                <h3 class="project-title">Миграция на новую версию 1С</h3>
+                <p class="project-description">Обновление и миграция баз данных 1С на новую платформу</p>
+
+                <div class="project-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 30%"></div>
+                    </div>
+                    <span class="progress-text">30% завершено</span>
+                </div>
+
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>05.11.2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>4 участника</span>
+                    </div>
+                </div>
+
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <div class="team-avatar">КД</div>
+                        <div class="team-avatar">ТС</div>
+                        <div class="team-avatar">РП</div>
+                        <div class="team-avatar">+1</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project card 6 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-status status-active">Активный</span>
+                    <div class="project-actions">
+                        <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+
+                <h3 class="project-title">Внедрение системы электронного документооборота</h3>
+                <p class="project-description">Внедрение СЭД для автоматизации workflow и документооборота</p>
+
+                <div class="project-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%"></div>
+                    </div>
+                    <span class="progress-text">45% завершено</span>
+                </div>
+
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>20.12.2023</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>7 участников</span>
+                    </div>
+                </div>
+
+                <div class="project-team">
+                    <div class="team-avatars">
+                        <div class="team-avatar">ЕС</div>
+                        <div class="team-avatar">МЛ</div>
+                        <div class="team-avatar">ДК</div>
+                        <div class="team-avatar">+4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="pagination-btn disabled">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="projects.js"></script>
 </body>
 </html>
