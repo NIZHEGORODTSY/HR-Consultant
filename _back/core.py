@@ -94,8 +94,7 @@ def get_all_info(uid: int) -> dict:
     for educ in data:
         res['additional_info'][str(educ[0])] = {
             "user_id": educ[1],
-            "languages": [lang for lang in educ[2]],
-            "projects": [proj for proj in educ[3]]
+            "description": [lang for lang in educ[2]]
         }
 
     data = get_category_info('career_preferences', uid)
@@ -103,10 +102,7 @@ def get_all_info(uid: int) -> dict:
     for educ in data:
         res['career_preferences'][str(educ[0])] = {
             "user_id": educ[1],
-            "desired_position": educ[2],
-            "preferred_technologies": [tech for tech in educ[3]],
-            "work_format": educ[4],
-            "expected_salary": educ[5]
+            "description": [tech for tech in educ[2]]
         }
 
     return res
