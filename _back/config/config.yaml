@@ -1,4 +1,4 @@
-dbname: main
+dbname: postgres
 dbuser: postgres
 dbpwd: 1234
 dbhost: 192.168.0.101
