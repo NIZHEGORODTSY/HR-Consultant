@@ -65,9 +65,8 @@ def profile_view():
         shortname += word[0].capitalize()
     position = 'god'
     department = 'Yandex'
-    _data = core.get_user_info(flask_request.cookies.get('access_token'))
-    return render_template('profile.html', data=_data, fullname=name, shortname=shortname[:2], position=_data,
-                           department=department)
+    # _data = core.get_user_info(flask_request.cookies.get('access_token'))
+    return render_template('profile.html', fullname=name, shortname=shortname[:2])
 
 
 @app.route('/login', methods=['GET'])
