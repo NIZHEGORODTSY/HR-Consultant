@@ -8,18 +8,24 @@ app = Flask(__name__)
 
 @app.before_request
 def check_cookies():
-    if flask_request.path != '/' and flask_request.path != '/login':
-        try:
-            token = flask_request.cookies['access_token']
-            decoded = jwt.decode(token, 'ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb', algorithms=["HS256"])
-            g.uid = decoded['uid']
-        except:
-            return app.redirect('/login')
+    pass
+    # if flask_request.path != '/' and flask_request.path != '/login':
+    #     try:
+    #         token = flask_request.cookies['access_token']
+    #         decoded = jwt.decode(token, 'ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb', algorithms=["HS256"])
+    #         g.uid = decoded['uid']
+    #     except:
+    #         return app.redirect('/login')
 
 
 @app.route('/')
 def dum():
-    return app.redirect('/profile')
+    return app.redirect('/login')
+
+
+@app.route('/chat')
+def show_chat():
+    return render_template('chat.html')
 
 
 @app.route('/authreq_resource', methods=['GET'])
@@ -27,7 +33,7 @@ def f():
     req_cookies = {
         'access_token': flask_request.cookies['access_token']
     }
-    response = requests.get('http://127.0.0.1:5000/id', cookies=req_cookies)
+    response = requests.get('http://192.168.0.108:5000/id', cookies=req_cookies)
     if response.status_code == 401:
         return app.redirect(f'/login')
     return app.redirect(f'/profile')
