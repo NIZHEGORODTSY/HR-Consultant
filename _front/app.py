@@ -22,6 +22,31 @@ def dum():
     return app.redirect('/profile')
 
 
+@app.route('/projects')
+def show_projects():
+    return render_template('projects.html')
+
+
+@app.route('/tasks')
+def show_projects():
+    return render_template('tasks.html')
+
+
+@app.route('/calendar')
+def show_projects():
+    return render_template('calendar.html')
+
+
+@app.route('/exit')
+def show_projects():
+    return render_template('calendar.html')
+
+
+@app.route('/edit_profile')
+def show_projects():
+    return 'here you can edit your profile'
+
+
 @app.route('/chat')
 def show_chat():
     userinfo = core.get_user_info(flask_request.cookies.get('access_token'))

@@ -26,6 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Добавляем активный класс к текущей ссылке
             this.classList.add('active');
 
+            if (this.textContent.includes('Задачи')) {
+                // Выполняем переадресацию на эндпоинт /tasks
+                window.location.href = '/tasks';
+                return;
+            }
+
             // В реальном приложении здесь будет переход между разделами
             alert(`Переход в раздел: ${this.textContent.trim()}`);
         });
