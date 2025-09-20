@@ -1,6 +1,6 @@
 from dbapi.main import *
 import datetime
-from .config import reader
+from config import reader
 import jwt
 
 reader.read_config()

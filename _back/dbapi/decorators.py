@@ -1,6 +1,6 @@
 import psycopg2
 from functools import wraps
-from _back.config import reader
+from config import reader
 
 reader.read_config()
 

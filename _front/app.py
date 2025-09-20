@@ -39,18 +39,15 @@ def f():
 @app.route('/profile', methods=['GET'])
 def profile_view():
     # token = flask_request.cookies.get('acess_token')
-    fullname = g.name
+    fullname = 'g.name'
     lst = str(fullname).split()
     shortname = ''
     for word in lst:
         shortname += word[0].capitalize()
     position = 'god'
     department = 'Yandex'
-    response = requests.get(
-        'http://127.0.0.1:5000/info'
-    )
-    data = response.json()
-    return render_template('profile.html', fullname=fullname, shortname=shortname, position=position, department=department)
+    _data = core.get_user_info(flask_request.cookies.get('access_token'))
+    return render_template('profile.html', data=_data, fullname=fullname, shortname=shortname, position=position, department=department)
 
 
 @app.route('/login', methods=['GET'])
@@ -82,6 +79,7 @@ def login_post():
         g.name = fullname
 
         return resp
+
 
 
 app.run(debug=True, port=5001, host='0.0.0.0')
