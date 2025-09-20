@@ -57,16 +57,16 @@ def show_chat():
 
 @app.route('/profile', methods=['GET'])
 def profile_view():
-    # token = flask_request.cookies.get('acess_token')
-    fullname = g.name
-    lst = str(fullname).split()
+    token = flask_request.cookies['access_token']
+    uid, name = core.decode_jwt(token)
+    lst = str(name).split()
     shortname = ''
     for word in lst:
         shortname += word[0].capitalize()
     position = 'god'
     department = 'Yandex'
     _data = core.get_user_info(flask_request.cookies.get('access_token'))
-    return render_template('profile.html', data=_data, fullname=fullname, shortname=shortname, position=position,
+    return render_template('profile.html', data=_data, fullname=name, shortname=shortname, position=position,
                            department=department)
 
 
