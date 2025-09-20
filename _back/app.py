@@ -1,6 +1,6 @@
 from flask import Flask, request, make_response, g
 from config import reader
-from core import verify_user, generate_jwt, create_recording
+from core import verify_user, generate_jwt, create_recording, get_all_info
 import jwt
 
 reader.read_config()
@@ -42,9 +42,17 @@ def create():
     create_recording(category, g.uid)
     return make_response({}, 200)
 
+@app.route('/info', methods = ['GET'])
+def get_user_info():
+    # id = g.uid
+    res = get_all_info(1)
+    return make_response(res, 200)
+
+    
+
 
 @app.route('/id', methods=['POST'])
 def dummy():
     return make_response({}, 200)
 
-app.run(debug=True, port=5000, host='0.0.0.0')
+    app.run(debug=True, port=5000, host='0.0.0.0')
