@@ -8,19 +8,17 @@ app = Flask(__name__)
 
 @app.before_request
 def check_cookies():
-    pass
-    # if flask_request.path != '/' and flask_request.path != '/login':
-    #     try:
-    #         token = flask_request.cookies['access_token']
-    #         decoded = jwt.decode(token, 'ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb', algorithms=["HS256"])
-    #         g.uid = decoded['uid']
-    #     except:
-    #         return app.redirect('/login')
-
+    if flask_request.path != '/' and flask_request.path != '/login' and '/static' not in flask_request.path:
+        try:
+            token = flask_request.cookies['access_token']
+            decoded = jwt.decode(token, 'ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb', algorithms=["HS256"])
+            g.uid = decoded['uid']
+        except:
+            return app.redirect('/login')
 
 @app.route('/')
 def dum():
-    return app.redirect('/login')
+    return app.redirect('/profile')
 
 
 @app.route('/chat')
@@ -33,7 +31,6 @@ def f():
     req_cookies = {
         'access_token': flask_request.cookies['access_token']
     }
-    response = requests.get('http://192.168.0.108:5000/id', cookies=req_cookies)
     if response.status_code == 401:
         return app.redirect(f'/login')
     return app.redirect(f'/profile')
@@ -41,16 +38,16 @@ def f():
 
 @app.route('/profile', methods=['GET'])
 def profile_view():
-    token = flask_request.cookies.get('acess_token')
-    fullname = g.name
+    # token = flask_request.cookies.get('acess_token')
+    fullname = 'g.name'
     lst = str(fullname).split()
     shortname = ''
     for word in lst:
         shortname += word[0].capitalize()
     position = 'god'
     department = 'Yandex'
-    return render_template('profile.html', fullname=fullname, shortname=shortname, position=position,
-                           department=department)
+    _data = core.get_user_info(flask_request.cookies.get('access_token'))
+    return render_template('profile.html', data=_data, fullname=fullname, shortname=shortname, position=position, department=department)
 
 
 @app.route('/login', methods=['GET'])
@@ -64,7 +61,7 @@ def login_post():
     pwd = flask_request.form['pwd']
 
     response = requests.post(
-        'http://192.168.0.108:5000/login',
+        'http://127.0.0.1:5000/login',
         json={
             'login': name,
             'pwd': pwd
@@ -74,7 +71,7 @@ def login_post():
         return render_template('login.html', gnev_message='Неверное имя пользователя или пароль!')
     else:
         token = response.cookies['access_token']
-        resp = make_response(app.redirect('/authreq_resource'))
+        resp = make_response(app.redirect('/profile'))
         resp.set_cookie(key='access_token', value=token, max_age=None)
 
         uid, fullname = core.decode_jwt(token)
@@ -82,6 +79,7 @@ def login_post():
         g.name = fullname
 
         return resp
+
 
 
 app.run(debug=True, port=5001, host='0.0.0.0')

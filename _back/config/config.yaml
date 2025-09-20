@@ -1,0 +1,6 @@
+dbname: postgres
+dbuser: user
+dbpwd: verystrongpassword
+dbhost: localhost
+dbport: 5455
+jwt-key: ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb
