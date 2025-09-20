@@ -16,6 +16,7 @@ def check_cookies():
         except:
             return app.redirect('/login')
 
+
 @app.route('/')
 def dum():
     return app.redirect('/profile')
@@ -26,14 +27,6 @@ def show_chat():
     return render_template('chat.html')
 
 
-@app.route('/authreq_resource', methods=['GET'])
-def f():
-    req_cookies = {
-        'access_token': flask_request.cookies['access_token']
-    }
-    if response.status_code == 401:
-        return app.redirect(f'/login')
-    return app.redirect(f'/profile')
 
 
 @app.route('/profile', methods=['GET'])
@@ -47,7 +40,8 @@ def profile_view():
     position = 'god'
     department = 'Yandex'
     _data = core.get_user_info(flask_request.cookies.get('access_token'))
-    return render_template('profile.html', data=_data, fullname=fullname, shortname=shortname, position=position, department=department)
+    return render_template('profile.html', data=_data, fullname=fullname, shortname=shortname, position=position,
+                           department=department)
 
 
 @app.route('/login', methods=['GET'])
@@ -79,7 +73,6 @@ def login_post():
         g.name = fullname
 
         return resp
-
 
 
 app.run(debug=True, port=5001, host='0.0.0.0')
