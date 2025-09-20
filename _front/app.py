@@ -23,6 +23,8 @@ def dum():
 
 @app.route('/chat')
 def show_chat():
+    userinfo = core.get_user_info(flask_request.cookies.get('access_token'))
+    
     return render_template('chat.html')
 
 
