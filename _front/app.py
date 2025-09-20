@@ -1,5 +1,6 @@
-from flask import Flask, request as flask_request, jsonify, make_response, render_template
+from flask import Flask, request as flask_request, jsonify, make_response, render_template, g
 import requests
+import jwt
 
 app = Flask(__name__)
 
@@ -7,8 +8,13 @@ app = Flask(__name__)
 @app.before_request
 def check_cookies():
     if flask_request.path not in ['/login', '/reguster']:
-        if 'access_token' not in flask_request.cookies:
-            return app.redirect('/login')
+        if flask_request.path not in ['/login', '/reguster']:
+            try:
+                token = flask_request.cookies['access_token']
+                decoded = jwt.decode(token, 'ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb', algorithms=["HS256"])
+                g.uid = decoded['uid']
+            except:
+                return app.redirect('/')
 
 
 @app.route('/authreq_resource', methods=['GET'])
@@ -22,14 +28,19 @@ def f():
     return app.redirect(f'/profile')
 
 
-@app.route('/login', methods=['GET'])
+@app.route('/', methods=['GET'])
 def login_view():
     return render_template('login.html', gnev_message='')
 
 
 @app.route('/profile', methods=['GET'])
 def profile_view():
-    return render_template('profile.html')
+    token = flask_request.cookies.get('acess_token')
+    fullname = '0'
+    shortname = '1'
+    position = 'god'
+    department = 'Yandex'
+    return render_template('profile.html', fullname=fullname, shortname=shortname, position=position, department=department)
 
 
 @app.route('/login', methods=['POST'])

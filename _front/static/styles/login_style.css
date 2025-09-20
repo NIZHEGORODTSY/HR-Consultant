@@ -29,7 +29,7 @@ body {
     position: relative;
 }
 
-/* Анимированные фоновые элементы */
+
 .bg-circle {
     position: absolute;
     border-radius: 50%;

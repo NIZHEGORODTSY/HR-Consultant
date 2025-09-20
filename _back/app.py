@@ -25,10 +25,11 @@ def login():
     login = data.get('login')
     pwd = data.get('pwd')
     id = verify_user(login, pwd)
+    name = 'static name'
     if id == -1:
         return make_response({}, 401)
     resp = make_response({}, 200)
-    resp.set_cookie(key='access_token', value=generate_jwt(id), max_age=None)
+    resp.set_cookie(key='access_token', value=generate_jwt(id, name), max_age=None)
     return resp
 
 
@@ -40,4 +41,9 @@ def create():
     data = request.json
     category = data.get('category')
     create_recording(category, g.uid)
+    return make_response({}, 200)
+
+
+@app.route('/id', methods=['POST'])
+def dummy():
     return make_response({}, 200)

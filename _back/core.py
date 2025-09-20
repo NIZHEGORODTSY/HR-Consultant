@@ -28,10 +28,11 @@ def create_recording(category: int, id: int):
         create_career_preference_recording(id)
 
 
-def generate_jwt(id: int) -> str:
+def generate_jwt(id: int, name : int) -> str:
     payload = {
         'uid': id,
-        'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=5)
+        'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=5),
+        'name': name
     }
 
     token = jwt.encode(payload, reader.get_param_value('jwt-key'), algorithm='HS256')
