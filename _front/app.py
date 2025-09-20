@@ -52,7 +52,7 @@ def login_view():
 def login_post():
     name = flask_request.form['name']
     pwd = flask_request.form['pwd']
-
+    print("ПОшёл нахуй")
     response = requests.post(
         'http://127.0.0.1:5000/login',
         json={
@@ -60,10 +60,13 @@ def login_post():
             'pwd': pwd
         }
     )
+    print("ПОшёл нахуй")
     if response.status_code == 401:
         return render_template('login.html', gnev_message='Неверное имя пользователя или пароль!')
     else:
+        print("ПОшёл нахуй3")
         token = response.cookies['access_token']
+        print("ПОшёл нахуй4")
         resp = make_response(app.redirect('/profile'))
         resp.set_cookie(key='access_token', value=token, max_age=None)
 
