@@ -1,5 +1,5 @@
 from openai import OpenAI
-from _MODELS import reader
+from _back._MODELS import reader
 
 reader.read_config()
 API_KEY = reader.get_param_value('api-key')

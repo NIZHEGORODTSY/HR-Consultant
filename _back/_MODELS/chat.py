@@ -1,5 +1,5 @@
 from openai import OpenAI
-from _MODELS import reader
+from _back._MODELS import reader
 from generate_prompt import get_final_prompt
 
 reader.read_config()

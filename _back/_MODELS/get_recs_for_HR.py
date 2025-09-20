@@ -1,7 +1,6 @@
 import json
 from openai import OpenAI
-from _MODELS import reader
-from datetime import datetime
+from _back._MODELS import reader
 
 
 def get_rec_for_HR(uid: int):
