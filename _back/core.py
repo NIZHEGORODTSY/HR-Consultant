@@ -30,10 +30,21 @@ def create_recording(category: str, id: int):
         create_career_preference_recording(id)
 
 
-def add(data, id: int):
-    for category in CATEGORIES:
-        items = data.get(category)
-        update_recording(category, items)
+def add(uid: int, data: dict[str, dict]):
+    for category, category_data in data.items():
+        has_multiple_records = False
+        for key in category_data.keys():
+            if isinstance(key, int):
+                has_multiple_records = True
+                break
+        if has_multiple_records:
+            for record_id, record_data in category_data.items():
+                update_recording(uid, category, record_id, record_data)
+        else:
+            update_recording(category=category, record_id=None, values=category_data)
+    # for category in CATEGORIES:
+    #     items = data.get(category)
+    #     update_recording(category, items)
 
 
 def get_all_info(uid: int) -> dict:
@@ -46,8 +57,7 @@ def get_all_info(uid: int) -> dict:
             "university": educ[2],
             "level": educ[3],
             "spec": educ[4],
-            "grad_year": educ[5],
-            "diploma": educ[6]
+            "grad_year": educ[5]
         }
 
     data = get_category_info('additional_educations', uid)
@@ -58,8 +68,7 @@ def get_all_info(uid: int) -> dict:
             "name": educ[2],
             "company": educ[3],
             "issued": educ[4],
-            "hours_amount": educ[5],
-            "diploma": educ[6]
+            "hours_amount": educ[5]
         }
 
     data = get_category_info('roles', uid)
@@ -68,10 +77,8 @@ def get_all_info(uid: int) -> dict:
         res['roles'][str(educ[0])] = {
             "user_id": educ[1],
             "role": educ[2],
-            "experiance": educ[3],
-            "func_role": educ[4],
-            "team_role": educ[5],
-            "functionality": educ[6]
+            "start_date": educ[3],
+            "end_date": educ[4] 
         }
 
     data = get_category_info('skills', uid)
@@ -87,7 +94,8 @@ def get_all_info(uid: int) -> dict:
     for educ in data:
         res['additional_info'][str(educ[0])] = {
             "user_id": educ[1],
-            "description": educ[2]
+            "languages": [lang for lang in educ[2]],
+            "projects": [proj for proj in educ[3]]
         }
 
     data = get_category_info('career_preferences', uid)
@@ -95,7 +103,10 @@ def get_all_info(uid: int) -> dict:
     for educ in data:
         res['career_preferences'][str(educ[0])] = {
             "user_id": educ[1],
-            "description": educ[2]
+            "desired_position": educ[2],
+            "preferred_technologies": [tech for tech in educ[3]],
+            "work_format": educ[4],
+            "expected_salary": educ[5]
         }
 
     return res
