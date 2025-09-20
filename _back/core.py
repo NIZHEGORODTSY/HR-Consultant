@@ -1,17 +1,19 @@
 from dbapi.main import *
 import datetime
-from config import reader
+from .config import reader
 import jwt
 
 reader.read_config()
 
 CATEGORIES = ['educations', 'additional_educations', 'roles', 'skills', 'additional_info', 'career_preferences']
 
+
 def verify_user(login: str, pwd: str) -> tuple[int, Union[str, None]]:
     res = get_user(login, pwd)
     if len(res) == 0:
         return -1, None
     return res[0][0], res[0][1]
+
 
 def create_recording(category: str, id: int):
     if category == 'educations':
@@ -26,6 +28,7 @@ def create_recording(category: str, id: int):
         create_additional_info_recording(id)
     elif category == 'career_preferences':
         create_career_preference_recording(id)
+
 
 def add(data, id: int):
     for category in CATEGORIES:
@@ -46,7 +49,7 @@ def get_all_info(uid: int) -> dict:
             "grad_year": educ[5],
             "diploma": educ[6]
         }
-    
+
     data = get_category_info('additional_educations', uid)
     res['additional_educations'] = {}
     for educ in data:
@@ -58,7 +61,7 @@ def get_all_info(uid: int) -> dict:
             "hours_amount": educ[5],
             "diploma": educ[6]
         }
-    
+
     data = get_category_info('roles', uid)
     res['roles'] = {}
     for educ in data:
@@ -70,7 +73,7 @@ def get_all_info(uid: int) -> dict:
             "team_role": educ[5],
             "functionality": educ[6]
         }
-    
+
     data = get_category_info('skills', uid)
     res['skills'] = {}
     for educ in data:
@@ -78,7 +81,7 @@ def get_all_info(uid: int) -> dict:
             "user_id": educ[1],
             "description": educ[2]
         }
-    
+
     data = get_category_info('additional_info', uid)
     res['additional_info'] = {}
     for educ in data:
@@ -86,7 +89,7 @@ def get_all_info(uid: int) -> dict:
             "user_id": educ[1],
             "description": educ[2]
         }
-    
+
     data = get_category_info('career_preferences', uid)
     res['career_preferences'] = {}
     for educ in data:
@@ -94,11 +97,11 @@ def get_all_info(uid: int) -> dict:
             "user_id": educ[1],
             "description": educ[2]
         }
-    
+
     return res
 
 
-def generate_jwt(id: int, name : int) -> str:
+def generate_jwt(id: int, name: int) -> str:
     payload = {
         'uid': id,
         'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=5),
