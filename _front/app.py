@@ -22,8 +22,6 @@ def dum():
     return app.redirect('/profile')
 
 
-
-
 @app.route('/dashboard')
 def show_tasks():
     return render_template('dashboard.html')
