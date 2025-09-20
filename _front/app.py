@@ -22,14 +22,11 @@ def dum():
     return app.redirect('/profile')
 
 
-@app.route('/projects')
-def show_projects():
-    return render_template('projects.html')
 
 
-@app.route('/tasks')
+@app.route('/dashboard')
 def show_tasks():
-    return render_template('tasks.html')
+    return render_template('dashboard.html')
 
 
 @app.route('/progress')
