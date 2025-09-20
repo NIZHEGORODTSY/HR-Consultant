@@ -28,22 +28,22 @@ def show_projects():
 
 
 @app.route('/tasks')
-def show_projects():
+def show_tasks():
     return render_template('tasks.html')
 
 
 @app.route('/calendar')
-def show_projects():
+def show_calendar():
     return render_template('calendar.html')
 
 
 @app.route('/exit')
-def show_projects():
+def exit():
     return app.redirect('/login')
 
 
 @app.route('/edit_profile')
-def show_projects():
+def edit_profile():
     return 'here you can edit your profile'
 
 
