@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Дашборд</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/dash_style.css') }}">
+</head>
+<body>
+    <!-- Ваша навигация и header -->
+    <div class="header">
+        <span>Добро пожаловать, {{ fullname }}</span>
+        <span class="avatar">{{ shortname }}</span>
+    </div>
+
+    <!-- Контейнер для Dash приложения -->
+    <div style="margin: 20px;">
+        <iframe
+            src="/dash_user/"
+            style="width: 100%; height: 800px; border: none;"
+            onload="this.style.visibility='visible';"
+        ></iframe>
+    </div>
+</body>
+</html>

@@ -4,7 +4,8 @@ import jwt
 import core
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.serving import run_simple
-from dashboard_app import create_dash_app
+from hr_dashboard_app import create_dash_hr_app
+from user_dashboard_app import create_dash_user_app
 
 app = Flask(__name__)
 
@@ -27,8 +28,13 @@ def dum():
 
 @app.route('/profile/dashboard')
 def show_dash():
-    return 'дашборд'
-
+    token = flask_request.cookies['access_token']
+    uid, name, is_hr = core.decode_jwt(token)
+    shortname = ''
+    lst = str(name).split()
+    for word in lst:
+        shortname += word[0].capitalize()
+    return render_template('dashboard_user.html', fullname=name)
 
 @app.route('/profile/progress')
 def show_progress():
@@ -154,11 +160,13 @@ def get_answer():
     return response.json()
 
 
-dash_app = create_dash_app(app)
+dash_hr_app = create_dash_hr_app(app)
+dash_user_app = create_dash_user_app(app)
 
 # Настраиваем middleware для обработки Dash маршрутов
 application = DispatcherMiddleware(app, {
-    '/dash': dash_app.server
+    '/dash_hr': dash_hr_app.server,
+    '/dash_user': dash_user_app.server
 })
 
 app.run(debug=True, port=5001, host='0.0.0.0')
