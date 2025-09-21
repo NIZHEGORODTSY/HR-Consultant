@@ -22,12 +22,12 @@ def dum():
     return app.redirect('/profile')
 
 
-@app.route('/dashboard')
+@app.route('/profile/dashboard')
 def show_tasks():
     return render_template('dashboard.html')
 
 
-@app.route('/progress')
+@app.route('/profile/progress')
 def show_progress():
     return render_template('progress.html')
 
@@ -37,12 +37,12 @@ def exit():
     return app.redirect('/login')
 
 
-@app.route('/edit_profile')
+@app.route('/profile/edit_profile')
 def edit_profile():
     return 'here you can edit your profile'
 
 
-@app.route('/chat')
+@app.route('/profile/chat')
 def show_chat():
     userinfo = core.get_user_info(flask_request.cookies.get('access_token'))
     token = flask_request.cookies['access_token']
@@ -95,6 +95,28 @@ def login_post():
 
 @app.route('/admin')
 def show_hr_panel():
-    return
+    token = flask_request.cookies['access_token']
+    uid, name = core.decode_jwt(token)
+    lst = str(name).split()
+    shortname = ''
+    for word in lst:
+        shortname += word[0].capitalize()
+    return render_template('admin.html', fullname=name[:2], shortname=shortname)
+
+
+@app.route('/admin/dashboard')
+def show_hr_dashboard():
+    return 'hr dashboard'
+
+
+@app.route('/admin/search')
+def show_hr_search():
+    return 'hr dashboard'
+
+
+@app.route('/admin/employee')
+def show_hr_employee():
+    return 'employee'
+
 
 app.run(debug=True, port=5001, host='0.0.0.0')

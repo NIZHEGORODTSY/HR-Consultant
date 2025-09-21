@@ -1,10 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR-панель | Холдинг Т1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/admin_style.css') }}">
+    <script src="{{ url_for('static', filename='scripts/admin.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+<!-- Анимированные фоновые элементы -->
+<div class="bg-circle"></div>
+<div class="bg-circle"></div>
+<div class="bg-circle"></div>
 
+<!-- Header -->
+<div class="header">
+    <div class="logo">
+        <div class="logo-img">Т1</div>
+        <div class="logo-text">Холдинг Т1</div>
+    </div>
+
+    <div class="user-menu">
+        <div class="user-avatar">HR</div>
+    </div>
+</div>
+
+<!-- Main content -->
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="user-info">
+            <div class="user-info-avatar">{{shortname}}</div>
+            <div class="user-info-name">{{fullname}}</div>
+            <div class="user-info-position">HR-менеджер</div>
+            <div class="user-info-department">HR-отдел</div>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="/admin/dashboard" class="active"><i class="fas fa-chart-line"></i> Дашборд</a></li>
+            <li><a href="/admin/employee"><i class="fas fa-users"></i> Сотрудники</a></li>
+            <li><a href="/admin/search"><i class="fas fa-search"></i> Умный поиск</a></li>
+            <li><a href="/exit"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+        </ul>
+    </div>
+
+    <!-- Dashboard content -->
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">HR-дашборд</h1>
+            <div class="date-filter">
+                <i class="fas fa-calendar"></i>
+                <span>Сентябрь 2023</span>
+            </div>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-primary">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>547</h3>
+                    <p>Всего сотрудников</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts and tables -->
+        <div class="dashboard-grid">
+            <div class="chart-container">
+                <h2 class="section-title"><i class="fas fa-chart-bar"></i> Динамика найма</h2>
+                <div class="chart-placeholder">
+                    График динамики найма сотрудников
+                </div>
+            </div>
+
+            <div class="table-container">
+                <h2 class="section-title"><i class="fas fa-user-check"></i>Сотрудники</h2>
+                <table class="employees-table">
+                    <thead>
+                    <tr>
+                        <th>Сотрудник</th>
+                        <th>Должность</th>
+                        <th>Статус</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Александров П.</td>
+                        <td>Разработчик</td>
+                        <td><span class="status-badge status-active">Активен</span></td>
+                    </tr>
+                    <tr>
+                        <td>Иванова М.</td>
+                        <td>Дизайнер</td>
+                        <td><span class="status-badge status-onboarding">Онбординг</span></td>
+                    </tr>
+                    <tr>
+                        <td>Петров Д.</td>
+                        <td>Аналитик</td>
+                        <td><span class="status-badge status-active">Активен</span></td>
+                    </tr>
+                    <tr>
+                        <td>Сидорова Е.</td>
+                        <td>Менеджер</td>
+                        <td><span class="status-badge status-onboarding">Онбординг</span></td>
+                    </tr>
+                    <tr>
+                        <td>Кузнецов А.</td>
+                        <td>Тестировщик</td>
+                        <td><span class="status-badge status-offboard">Увольнение</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tasks section -->
+        <div class="tasks-container">
+            <h2 class="section-title"><i class="fas fa-tasks"></i> Задачи на сегодня</h2>
+
+            <div class="task-item">
+                <div class="task-checkbox checked"><i class="fas fa-check"></i></div>
+                <div class="task-info">
+                    <h4>Провести собеседование с кандидатом на должность разработчика</h4>
+                    <p>10:00 - 11:00, Конференц-зал №3</p>
+                </div>
+                <div class="task-priority priority-high"></div>
+            </div>
+
+            <div class="task-item">
+                <div class="task-checkbox"></div>
+                <div class="task-info">
+                    <h4>Подготовить отчет по текучести кадров</h4>
+                    <p>К 15:00, для руководства</p>
+                </div>
+                <div class="task-priority priority-medium"></div>
+            </div>
+
+            <div class="task-item">
+                <div class="task-checkbox"></div>
+                <div class="task-info">
+                    <h4>Организовать онбординг для новых сотрудников</h4>
+                    <p>Завтра, 10:00</p>
+                </div>
+                <div class="task-priority priority-high"></div>
+            </div>
+
+            <div class="task-item">
+                <div class="task-checkbox checked"><i class="fas fa-check"></i></div>
+                <div class="task-info">
+                    <h4>Согласовать график отпусков на следующий квартал</h4>
+                    <p>До конца недели</p>
+                </div>
+                <div class="task-priority priority-low"></div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

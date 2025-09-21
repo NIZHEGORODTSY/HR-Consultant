@@ -2,5 +2,3 @@
 .idea/
 __pycache__/
 config.yaml
-prompt_employee.txt
-prompt_HR.txt

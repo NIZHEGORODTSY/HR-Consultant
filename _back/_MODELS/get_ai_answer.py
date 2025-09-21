@@ -2,7 +2,9 @@ from conn import client
 from generate_prompt import get_final_prompt
 
 
-def get_ai_answer(user_input: str, message_history: list = [], is_first_message: bool = True, cnt: int = 0):
+def get_ai_answer(user_input: str, message_history: list) -> str:
+    is_first_message = True
+    cnt = 0
     ai_answer = ''
     cnt += 1
     if cnt >= 2:
