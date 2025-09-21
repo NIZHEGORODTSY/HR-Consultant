@@ -6,15 +6,15 @@ import core
 app = Flask(__name__)
 
 
-@app.before_request
-def check_cookies():
-    if flask_request.path != '/' and flask_request.path != '/login' and '/static' not in flask_request.path:
-        try:
-            token = flask_request.cookies['access_token']
-            decoded = jwt.decode(token, 'ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb', algorithms=["HS256"])
-            g.uid = decoded['uid']
-        except:
-            return app.redirect('/login')
+# @app.before_request
+# def check_cookies():
+#     if flask_request.path != '/' and flask_request.path != '/login' and '/static' not in flask_request.path:
+#         try:
+#             token = flask_request.cookies['access_token']
+#             decoded = jwt.decode(token, 'ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb', algorithms=["HS256"])
+#             g.uid = decoded['uid']
+#         except:
+#             return app.redirect('/login')
 
 
 @app.route('/')
@@ -44,16 +44,17 @@ def edit_profile():
 
 @app.route('/chat')
 def show_chat():
-    userinfo = core.get_user_info(flask_request.cookies.get('access_token'))
-    token = flask_request.cookies['access_token']
-    uid, name = core.decode_jwt(token)
+    # userinfo = core.get_user_info(flask_request.cookies.get('access_token'))
+    # token = flask_request.cookies['access_token']
+    # uid, name = core.decode_jwt(token)
     return render_template('chat.html')
 
 
 @app.route('/profile', methods=['GET'])
 def profile_view():
-    token = flask_request.cookies['access_token']
-    uid, name = core.decode_jwt(token)
+    # token = flask_request.cookies['access_token']
+    # uid, name = core.decode_jwt(token)
+    name = 'ВАСЯ'
     lst = str(name).split()
     shortname = ''
     for word in lst:

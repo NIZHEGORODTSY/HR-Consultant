@@ -2,6 +2,7 @@ from flask import Flask, request, make_response, g, jsonify
 from config import reader
 from core import verify_user, generate_jwt, create_recording, get_all_info
 import jwt
+from _MODELS.generate_prompt import get_final_prompt
 
 reader.read_config()
 
@@ -50,11 +51,11 @@ def get_user_info():
     return make_response(jsonify(res), 200)
 
 
-# @app.route('/generate_prompt', methods=['GET'])
-# def generate_prompt():
-#     name = 'Вася' #временно
-#     prompt = get_final_prompt(name)
-#     return make_response(jsonify(prompt), 200)
+@app.route('/generate_prompt', methods=['GET'])
+def generate_prompt():
+    name = 'Вася' #временно
+    prompt = get_final_prompt(name)
+    return make_response(jsonify(prompt), 200)
 
 
 app.run(debug=True, port=5000, host='0.0.0.0')
