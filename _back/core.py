@@ -2,6 +2,9 @@ from dbapi.main import *
 import datetime
 from config import reader
 import jwt
+from queue import Queue
+import threading
+import time
 
 reader.read_config()
 
@@ -117,3 +120,39 @@ def generate_jwt(id: int, name: int) -> str:
 
     token = jwt.encode(payload, reader.get_param_value('jwt-key'), algorithm='HS256')
     return token
+
+data_queue = Queue()
+
+results = {}
+results_lock = threading.Lock()
+
+
+def infinite_loop():
+    while True:
+        try:
+            if not data_queue.empty():
+                # Получаем данные из очереди
+                task_id, data, future = data_queue.get_nowait()
+                
+                print(f"Обрабатываю данные для task {task_id}: {data}")
+                
+                # Выполняем обработку
+                result = process_data(data)
+                
+                # Устанавливаем результат в Future
+                future.set_result(result)
+                
+                # Помечаем задачу как выполненную
+                data_queue.task_done()
+                
+            else:
+                time.sleep(0.1)
+                
+        except Exception as e:
+            print(f"Ошибка в цикле: {e}")
+            # Если произошла ошибка, устанавливаем исключение
+            with results_lock:
+                if task_id in results:
+                    results[task_id].set_exception(e)
+            time.sleep(1)
+
