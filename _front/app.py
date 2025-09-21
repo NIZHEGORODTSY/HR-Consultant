@@ -86,9 +86,10 @@ def login_post():
         resp = make_response(app.redirect('/profile'))
         resp.set_cookie(key='access_token', value=token, max_age=None)
 
-        uid, fullname = core.decode_jwt(token)
+        uid, fullname, is_hr = core.decode_jwt(token)
         g.uid = uid
         g.name = fullname
+        g.is_hr = is_hr
 
         return resp
 
@@ -101,7 +102,9 @@ def show_hr_panel():
     shortname = ''
     for word in lst:
         shortname += word[0].capitalize()
-    return render_template('admin.html', fullname=name[:2], shortname=shortname)
+    if g.is_hr == 1:
+        return render_template('admin.html', fullname=name[:2], shortname=shortname)
+    return app.redirect('/login')
 
 
 @app.route('/admin/dashboard')

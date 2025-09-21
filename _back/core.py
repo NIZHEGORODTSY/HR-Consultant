@@ -11,11 +11,11 @@ reader.read_config()
 CATEGORIES = ['educations', 'additional_educations', 'roles', 'skills', 'additional_info', 'career_preferences']
 
 
-def verify_user(login: str, pwd: str) -> tuple[int, Union[str, None]]:
+def verify_user(login: str, pwd: str):
     res = get_user(login, pwd)
     if len(res) == 0:
         return -1, None
-    return res[0][0], res[0][1]
+    return res[0][0], res[0][1], res[0][2]
 
 
 def create_recording(category: str, id: int):
@@ -111,11 +111,12 @@ def get_all_info(uid: int) -> dict:
     return res
 
 
-def generate_jwt(id: int, name: int) -> str:
+def generate_jwt(id: int, name: int, is_hr: int) -> str:
     payload = {
         'uid': id,
         'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=5),
-        'name': name
+        'name': name,
+        'is_hr': is_hr
     }
 
     token = jwt.encode(payload, reader.get_param_value('jwt-key'), algorithm='HS256')

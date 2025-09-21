@@ -24,11 +24,11 @@ def login():
     data = request.json
     login = data.get('login')
     pwd = data.get('pwd')
-    id, fullname = verify_user(login, pwd)
+    id, fullname, is_hr = verify_user(login, pwd)
     if id == -1:
         return make_response({}, 401)
     resp = make_response({}, 200)
-    resp.set_cookie(key='access_token', value=generate_jwt(id, fullname), max_age=None)
+    resp.set_cookie(key='access_token', value=generate_jwt(id, fullname, is_hr), max_age=None)
     return resp
 
 

@@ -4,7 +4,7 @@ from typing import Union
 
 @DBContext()
 def get_user(login: str, pwd: str, cursor=None) -> Union[list, None]:
-    query = f"""select id, full_name from users where login = '{login}' and pwd = '{pwd}' """
+    query = f"""select id, full_name, is_hr from users where login = '{login}' and pwd = '{pwd}' """
     cursor.execute(query)
     return cursor.fetchall()
 
