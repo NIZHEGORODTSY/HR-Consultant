@@ -1,6 +1,6 @@
 dbname: postgres
 dbuser: postgres
 dbpwd: 1234
-dbhost: 192.168.0.101
-dbport: 5432
+dbhost: hracz-5-227-24-17.a.free.pinggy.link
+dbport: 46513
 jwt-key: ashjashjsahjsfbsduifvbifbdhidiufdbsibfiubuidb
