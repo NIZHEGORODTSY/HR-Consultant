@@ -1,17 +1,9 @@
-from openai import OpenAI
-from _back._MODELS import reader
+from conn import client
 from generate_prompt import get_final_prompt
 
 
-def get_ai_answer():
-    message_history = []
-    cnt = 0
-    is_first_message = True
-    reader.read_config()
-    API_KEY = reader.get_param_value('api-key')
-    client = OpenAI(api_key=API_KEY, base_url="https://llm.t1v.scibox.tech/v1")
+def get_ai_answer(user_input: str, message_history: list = [], is_first_message: bool = True, cnt: int = 0):
     ai_answer = ''
-    user_input = input()
     cnt += 1
     if cnt >= 2:
         is_first_message = False
@@ -36,15 +28,12 @@ def get_ai_answer():
                             event.chunk.choices[0].delta.content):
                         ai_answer += event.chunk.choices[0].delta.content
                         # print(event.chunk.choices[0].delta.content, end="", flush=True)
-
-                elif event.type == 'content.delta' and hasattr(event, 'delta'):
-                    # Обрабатываем content.delta события
-                    if event.delta and hasattr(event.delta, 'content') and event.delta.content:
-                        pass
-                        # print(event.delta.content, end="", flush=True)
             message_history.append('ai: ' + ai_answer)
         return ai_answer
 
 
     except Exception as e:
         print(f"Error: {e}")
+
+
+print(get_ai_answer(input()))

@@ -1,10 +1,5 @@
-from openai import OpenAI
-from _back._MODELS import reader
 from generate_prompt import get_final_prompt
-
-reader.read_config()
-API_KEY = reader.get_param_value('api-key')
-client = OpenAI(api_key=API_KEY, base_url="https://llm.t1v.scibox.tech/v1")
+from conn import client
 
 message_history = []
 cnt = 0
