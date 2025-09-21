@@ -1,10 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой прогресс | Холдинг Т1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/progress_style.css') }}">
+    <script src="{{ url_for('static', filename='scripts/progress.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-CAAAAAAALENDAR
+<div class="bg-circle"></div>
+<div class="bg-circle"></div>
+<div class="bg-circle"></div>
+
+<div class="header">
+    <div class="logo">
+        <div class="logo-img">Т1</div>
+        <div class="logo-text">Холдинг Т1</div>
+    </div>
+
+    <div class="user-menu">
+        <div class="user-avatar">ИИ</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="user-info">
+            <div class="user-info-avatar">{{shortname}}</div>
+            <div class="user-info-name">{{fullname}}</div>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="/profile"><i class="fas fa-user"></i> Мой профиль</a></li>
+            <li><a href="/profile/progress" class="active"><i class="fas fa-briefcase"></i> Прогресс</a></li>
+            <li><a href="/profile/dashboard"><i class="fas fa-tasks"></i> Дашборд</a></li>
+            <li><a href="/profile/chat"><i class="fas fa-comment-alt"></i> ИИ-консультант</a></li>
+            <li><a href="/exit"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+        </ul>
+    </div>
+
+    <div class="progress-content">
+        <div class="progress-header">
+            <h1 class="progress-title">Мой прогресс</h1>
+            <div class="period-selector">
+                <i class="fas fa-calendar"></i>
+                <span>3 квартал 2023</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+
+        <div class="overall-progress">
+            <div class="progress-circle">
+                <svg viewBox="0 0 100 100">
+                    <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                    <circle class="circle-progress" cx="50" cy="50" r="45" stroke-dasharray="283"
+                            stroke-dashoffset="70"></circle>
+                </svg>
+                <div class="progress-value">75%</div>
+            </div>
+            <div class="progress-label">Общий прогресс</div>
+            <p class="progress-description">Вы достигли 75% от запланированных целей на этот период. Продолжайте в том
+                же духе!</p>
+        </div>
+
+        <div class="progress-categories">
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h2 class="category-title">Работа и проекты</h2>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Выполнение задач</span>
+                        <span class="progress-percent">82%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-work" style="width: 82%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Соблюдение сроков</span>
+                        <span class="progress-percent">78%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-work" style="width: 78%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Качество работы</span>
+                        <span class="progress-percent">85%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-work" style="width: 85%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h2 class="category-title">Обучение и развитие</h2>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Курсы и тренинги</span>
+                        <span class="progress-percent">65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-learning" style="width: 65%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Сертификации</span>
+                        <span class="progress-percent">40%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-learning" style="width: 40%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Внутренние обучения</span>
+                        <span class="progress-percent">90%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-learning" style="width: 90%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h2 class="category-title">Навыки и компетенции</h2>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Технические навыки</span>
+                        <span class="progress-percent">88%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-skills" style="width: 88%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Soft skills</span>
+                        <span class="progress-percent">72%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-skills" style="width: 72%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Иностранные языки</span>
+                        <span class="progress-percent">55%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-skills" style="width: 55%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h2 class="category-title">Цели и достижения</h2>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Квартальные цели</span>
+                        <span class="progress-percent">70%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-goals" style="width: 70%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Годовые цели</span>
+                        <span class="progress-percent">45%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-goals" style="width: 45%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span class="progress-name">Карьерный рост</span>
+                        <span class="progress-percent">60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-goals" style="width: 60%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievements">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Мои достижения</h2>
+
+            <div class="badges-container">
+                <div class="badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>Старт</span>
+                </div>
+
+                <div class="badge">
+                    <i class="fas fa-award"></i>
+                    <span>Профи</span>
+                </div>
+
+                <div class="badge">
+                    <i class="fas fa-users"></i>
+                    <span>Команда</span>
+                </div>
+
+                <div class="badge">
+                    <i class="fas fa-star"></i>
+                    <span>Звезда</span>
+                </div>
+
+                <div class="badge locked">
+                    <i class="fas fa-crown"></i>
+                    <span>Эксперт</span>
+                </div>
+
+                <div class="badge locked">
+                    <i class="fas fa-gem"></i>
+                    <span>Мастер</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

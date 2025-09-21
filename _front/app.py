@@ -29,7 +29,13 @@ def show_tasks():
 
 @app.route('/profile/progress')
 def show_progress():
-    return render_template('progress.html')
+    token = flask_request.cookies['access_token']
+    uid, name, is_hr = core.decode_jwt(token)
+    lst = str(name).split()
+    shortname = ''
+    for word in lst:
+        shortname += word[0].capitalize()
+    return render_template('progress.html', fullname=name, shortname=shortname)
 
 
 @app.route('/exit')
@@ -47,7 +53,11 @@ def show_chat():
     userinfo = core.get_user_info(flask_request.cookies.get('access_token'))
     token = flask_request.cookies['access_token']
     uid, name, is_hr = core.decode_jwt(token)
-    return render_template('chat.html')
+    shortname = ''
+    lst = str(name).split()
+    for word in lst:
+        shortname += word[0].capitalize()
+    return render_template('chat.html', fullname=name, shortname=shortname[:2])
 
 
 @app.route('/profile', methods=['GET'])
