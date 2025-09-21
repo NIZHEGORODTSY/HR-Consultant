@@ -1,8 +1,8 @@
-from conn import client
-from generate_prompt import get_final_prompt
+from _MODELS.conn.conn import client
+from _MODELS.tools.generate_prompt import get_final_prompt
 
 
-def get_ai_answer(user_input: str, message_history: list) -> str:
+def get_ai_answer(user_input: str, message_history: list = []) -> str:
     is_first_message = True
     cnt = 0
     ai_answer = ''
@@ -38,4 +38,4 @@ def get_ai_answer(user_input: str, message_history: list) -> str:
         print(f"Error: {e}")
 
 
-print(get_ai_answer(input()))
+# print(get_ai_answer(input()))

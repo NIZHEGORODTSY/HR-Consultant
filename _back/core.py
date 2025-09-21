@@ -5,6 +5,7 @@ import jwt
 from queue import Queue
 import threading
 import time
+from _MODELS.get_ai_answer import get_ai_answer
 
 reader.read_config()
 
@@ -138,7 +139,7 @@ def infinite_loop():
                 print(f"Обрабатываю данные для task {task_id}: {data}")
                 
                 # Выполняем обработку
-                result = process_data(data)
+                result = get_ai_answer(data)
                 
                 # Устанавливаем результат в Future
                 future.set_result(result)

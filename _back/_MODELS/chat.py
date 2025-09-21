@@ -1,5 +1,5 @@
-from generate_prompt import get_final_prompt
-from conn import client
+from _MODELS.tools.generate_prompt import get_final_prompt
+from _MODELS.conn.conn import client
 
 message_history = []
 cnt = 0
