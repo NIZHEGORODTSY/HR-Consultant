@@ -54,7 +54,7 @@ def get_user_info():
     return make_response(jsonify(res), 200)
 
 
-@app.route('/get_answer', methods=['GET'])
+@app.route('/get_answer', methods=['POST'])
 def generate_prompt():
     data = request.json
     message = data.get('message')

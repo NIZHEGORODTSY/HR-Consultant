@@ -195,7 +195,7 @@ def get_final_prompt(username: str, is_first_message: bool, message_history: lis
         message_history=message_history
     )
 
-    with open('_Models/tools/prompt_employee.txt', 'r', encoding='utf-8') as file:
+    with open('_MODELS/prompt_employee.txt', 'r', encoding='utf-8') as file:
         prompt_template = file.read()
 
     final_prompt = prompt_template.format(**user_context)

@@ -2,6 +2,7 @@ from _MODELS.conn.conn import client
 from _MODELS.tools.generate_prompt import get_final_prompt
 
 
+
 def get_ai_answer(user_input: str, message_history: list = []) -> str:
     is_first_message = True
     cnt = 0

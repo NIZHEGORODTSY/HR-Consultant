@@ -140,6 +140,19 @@ def show_hr_search():
 def show_hr_employee():
     return 'employee'
 
+@app.route('/get_answer', methods=['POST'])
+def get_answer():
+    data = flask_request.json
+    response = requests.post(
+        'http://127.0.0.1:5000/get_answer',
+        json=data,
+        cookies={
+            "access_token": flask_request.cookies.get('access_token')
+        }
+    )
+    asasa = response.json()
+    return response.json()
+
 
 dash_app = create_dash_app(app)
 

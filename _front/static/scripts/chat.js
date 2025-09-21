@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const sendButton = document.getElementById('sendButton');
 
             // Функция отправки сообщения
-            function sendMessage() {
+            async function sendMessage() {
                 const message = messageInput.value.trim();
                 if (message) {
                     // Добавляем сообщение пользователя
@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Очищаем поле ввода
                     messageInput.value = '';
 
-                    // Имитируем ответ ИИ с задержкой
                     const data = {
                         "message": message
                     }
+                    console.log(message)
                     try {
-                        const response = fetch('https://okvuo-5-227-24-17.a.free.pinggy.link:35909/get_answer', {
+                        const response = await fetch('http://127.0.0.1:5001/get_answer', {
                           method: 'POST',
                           headers: {
                             'Content-Type': 'application/json',
@@ -26,8 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
                           body: JSON.stringify(data)
                         });
 
-                        const result = response.json;
-                        alert('Success:', result);
+                        const result = await response.json();
+                        console.log(result);
+                        addMessage(result.answer, 'ai');
+                        
                     } catch (error) {
                         addMessage(error, 'ai');
                       }
