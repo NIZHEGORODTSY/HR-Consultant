@@ -3,6 +3,16 @@ Career Pilot — это инновационная веб-платформа, к
 
 ССЫЛКА НА СЕРВИС:
 https://cb69b3830b35ce58950cd791eb37b628.serveo.net
+
+Для HR  
+  login: admin_test  
+  password: admin    
+
+  
+Для пользователя:  
+  login: ivanov  
+  password: password123
+
 Мы используем бесплатный деплой, ссылка может не работать. Напишите, пожалуйста, @v_traktorov
 
 Для доступа к серверу читайте файл txt.txt
