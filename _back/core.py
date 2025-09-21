@@ -82,7 +82,7 @@ def get_all_info(uid: int) -> dict:
             "user_id": educ[1],
             "role": educ[2],
             "start_date": educ[3],
-            "end_date": educ[4] 
+            "end_date": educ[4]
         }
 
     data = get_category_info('skills', uid)
@@ -123,6 +123,7 @@ def generate_jwt(id: int, name: int, is_hr: int) -> str:
     token = jwt.encode(payload, reader.get_param_value('jwt-key'), algorithm='HS256')
     return token
 
+
 data_queue = Queue()
 
 results = {}
@@ -135,21 +136,21 @@ def infinite_loop():
             if not data_queue.empty():
                 # Получаем данные из очереди
                 task_id, data, future = data_queue.get_nowait()
-                
+
                 print(f"Обрабатываю данные для task {task_id}: {data}")
-                
+
                 # Выполняем обработку
                 result = get_ai_answer(data)
-                
+
                 # Устанавливаем результат в Future
                 future.set_result(result)
-                
+
                 # Помечаем задачу как выполненную
                 data_queue.task_done()
-                
+
             else:
                 time.sleep(0.1)
-                
+
         except Exception as e:
             print(f"Ошибка в цикле: {e}")
             # Если произошла ошибка, устанавливаем исключение
@@ -157,4 +158,3 @@ def infinite_loop():
                 if task_id in results:
                     results[task_id].set_exception(e)
             time.sleep(1)
-

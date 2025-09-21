@@ -8,41 +8,37 @@
     <script src="{{ url_for('static', filename='scripts/login.js') }}" defer></script>
 </head>
 <body>
-    <!-- Анимированные фоновые элементы -->
-    <div class="bg-circle"></div>
-    <div class="bg-circle"></div>
-    <div class="bg-circle"></div>
-    <div class="bg-circle"></div>
+<!-- Анимированные фоновые элементы -->
+<div class="bg-circle"></div>
+<div class="bg-circle"></div>
+<div class="bg-circle"></div>
+<div class="bg-circle"></div>
 
-    <div class="container">
-        <div class="logo">
-            <div class="logo-img">Т1</div>
-            <h1>Холдинг Т1</h1>
-            <p>Войдите в вашу учетную запись</p>
-        </div>
-
-        <form id="loginForm" method="post" action="/login">
-            <div class="form-group">
-                <label for="username">Логин</label>
-                <input type="text" id="username" class="form-control" placeholder="Введите ваш логин" required name="name">
-            </div>
-
-            <div class="form-group">
-                <label for="password">Пароль</label>
-                <input type="password" id="password" class="form-control" placeholder="Введите ваш пароль" required name="pwd">
-            </div>
-
-            <button type="submit" class="btn">Войти</button>
-        </form>
-
-        <div class="links">
-            <a href="#">Забыли пароль?</a>
-            <a href="#">Помощь</a>
-        </div>
-
-        <div class="footer">
-            <p>© 2023 Холдинг Т1. Все права защищены.</p>
-        </div>
+<div class="container">
+    <div class="logo">
+        <div class="logo-img">Т1</div>
+        <h1>Холдинг Т1</h1>
+        <p>Войдите в вашу учетную запись</p>
     </div>
+
+    <form id="loginForm" method="post" action="/login">
+        <div class="form-group">
+            <label for="username">Логин</label>
+            <input type="text" id="username" class="form-control" placeholder="Введите ваш логин" required name="name">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" class="form-control" placeholder="Введите ваш пароль" required
+                   name="pwd">
+        </div>
+
+        <button type="submit" class="btn">Войти</button>
+    </form>
+
+    <div class="footer">
+        <p>© 2025 Холдинг Т1. Все права защищены.</p>
+    </div>
+</div>
 </body>
 </html>

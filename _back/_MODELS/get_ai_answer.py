@@ -37,5 +37,4 @@ def get_ai_answer(user_input: str, message_history: list = []) -> str:
     except Exception as e:
         print(f"Error: {e}")
 
-
 # print(get_ai_answer(input()))

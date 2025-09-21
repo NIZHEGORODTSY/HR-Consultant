@@ -6,7 +6,7 @@ CONFIG: Dict[str, Optional[Union[str, int]]] = {}
 
 def read_config() -> None:
     global CONFIG
-    with open('_Models/reader/config.yaml', 'r') as config_file:
+    with open('_MODELS/config.yaml', 'r') as config_file:
         CONFIG = yaml.safe_load(config_file)
 
 

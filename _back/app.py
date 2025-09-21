@@ -1,6 +1,7 @@
 from flask import Flask, request, make_response, g, jsonify
 from config import reader
-from core import verify_user, generate_jwt, create_recording, get_all_info, data_queue, results, results_lock, infinite_loop
+from core import verify_user, generate_jwt, create_recording, get_all_info, data_queue, results, results_lock, \
+    infinite_loop
 import jwt
 from concurrent.futures import Future
 import threading
@@ -58,17 +59,17 @@ def generate_prompt():
     data = request.json
     message = data.get('message')
     task_id = str(uuid.uuid4())
-    
+
     future = Future()
     with results_lock:
         results[task_id] = future
     try:
         # Помещаем задачу в очередь
         data_queue.put((task_id, message, future))
-        
+
         # Ждем результат с таймаутом
         result = future.result(timeout=30.0)  # 30 секунд таймаут
-        
+
         # Удаляем Future из словаря
         with results_lock:
             results.pop(task_id, None)
@@ -81,7 +82,7 @@ def generate_prompt():
         with results_lock:
             results.pop(task_id, None)
         return {"status": "error", "message": "Processing timeout"}
-    
+
     except Exception as e:
         with results_lock:
             results.pop(task_id, None)
@@ -91,6 +92,3 @@ def generate_prompt():
 loop_thread = threading.Thread(target=infinite_loop, daemon=True)
 loop_thread.start()
 app.run(debug=True, port=5000, host='0.0.0.0')
-
-
-

@@ -15,6 +15,7 @@ def get_all_users(cursor=None) -> list:
     cursor.execute(query)
     return cursor.fetchall()
 
+
 @DBContext()
 def create_education_recording(uid: int, cursor=None) -> Union[int, None]:
     query = f"""INSERT INTO educations (user_id) VALUES ('{uid}')"""

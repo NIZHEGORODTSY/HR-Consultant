@@ -2,6 +2,9 @@ from flask import Flask, request as flask_request, make_response, render_templat
 import requests
 import jwt
 import core
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.serving import run_simple
+from dashboard_app import create_dash_app
 
 app = Flask(__name__)
 
@@ -23,8 +26,8 @@ def dum():
 
 
 @app.route('/profile/dashboard')
-def show_tasks():
-    return render_template('dashboard.html')
+def show_dash():
+    return 'дашборд'
 
 
 @app.route('/profile/progress')
@@ -119,17 +122,30 @@ def show_hr_panel():
 
 @app.route('/admin/dashboard')
 def show_hr_dashboard():
-    return 'hr dashboard'
+    token = flask_request.cookies['access_token']
+    uid, name, is_hr = core.decode_jwt(token)
+    shortname = ''
+    lst = str(name).split()
+    for word in lst:
+        shortname += word[0].capitalize()
+    return render_template('dashboard_hr.html', fullname=name)
 
 
 @app.route('/admin/search')
 def show_hr_search():
-    return 'hr dashboard'
+    return 'поиск'
 
 
 @app.route('/admin/employee')
 def show_hr_employee():
     return 'employee'
 
+
+dash_app = create_dash_app(app)
+
+# Настраиваем middleware для обработки Dash маршрутов
+application = DispatcherMiddleware(app, {
+    '/dash': dash_app.server
+})
 
 app.run(debug=True, port=5001, host='0.0.0.0')

@@ -1,5 +1,5 @@
 import json
-from _MODELS.conn.conn import client
+from conn.conn import client  # не забыть поменять перед пушем
 
 
 def get_rec_for_hr(uid: int):
@@ -133,4 +133,4 @@ def get_rec_for_hr(uid: int):
         print(f"Ошибка при выполнении запроса: {e}")
 
 
-# print(get_rec_for_HR(1))
+print(get_rec_for_hr(1))
