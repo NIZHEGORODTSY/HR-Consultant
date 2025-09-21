@@ -1,7 +1,7 @@
 # layout.py
 from dash import dcc, html
 from datetime import datetime
-from data_processing import DataProcessor
+from hr_data_processing import DataProcessor
 
 
 def create_layout(data_processor):

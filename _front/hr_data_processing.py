@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime
-from database import get_data_from_db, create_test_data
+from hr_database import get_data_from_db, create_test_data
 
 
 class DataProcessor:

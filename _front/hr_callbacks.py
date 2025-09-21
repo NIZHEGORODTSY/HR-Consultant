@@ -1,6 +1,6 @@
 # callbacks.py
 from dash import Input, Output, html
-from data_processing import DataProcessor
+from hr_data_processing import DataProcessor
 import pandas as pd
 
 

@@ -1,7 +1,7 @@
 # database.py
 import pandas as pd
 from sqlalchemy import create_engine, text
-from config import CONNECTION_STRING
+from hr_config import CONNECTION_STRING
 
 
 def get_data_from_db():
