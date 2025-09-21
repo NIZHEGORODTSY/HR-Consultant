@@ -50,11 +50,12 @@ def get_user_info():
     return make_response(jsonify(res), 200)
 
 
-# @app.route('/generate_prompt', methods=['GET'])
-# def generate_prompt():
-#     name = 'Вася' #временно
-#     prompt = get_final_prompt(name)
-#     return make_response(jsonify(prompt), 200)
+@app.route('/get_answer', methods=['GET'])
+def generate_prompt():
+    data = request.json
+    message = data.get('message')
+    prompt = get_final_prompt(message)
+    return make_response(jsonify(prompt), 200)
 
 
 app.run(debug=True, port=5000, host='0.0.0.0')
