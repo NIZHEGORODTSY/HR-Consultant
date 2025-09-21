@@ -1,9 +1,8 @@
 import json
-from openai import OpenAI
-from _back._MODELS import reader
+from conn import client
 
 
-def get_rec_for_HR(uid: int):
+def get_rec_for_hr(uid: int):
     # Данные профиля
     profile_data = {
         "educations": {
@@ -88,12 +87,7 @@ def get_rec_for_HR(uid: int):
             "relocation": "Рассматриваю",
             "expected_salary": 350000
         }
-    } #получем данные о пользователе по uid
-
-    # Настройка клиента OpenAI
-    reader.read_config()
-    API_KEY = reader.get_param_value('api-key')
-    client = OpenAI(api_key=API_KEY, base_url="https://llm.t1v.scibox.tech/v1")
+    }  # получем данные о пользователе по uid
 
     prompt = f"""Ты — опытный HR-аналитик и карьерный консультант. Проанализируй профиль разработчика и предоставь анализ В СТРОГОМ ФОРМАТЕ JSON без каких-либо пояснений до или после.
     

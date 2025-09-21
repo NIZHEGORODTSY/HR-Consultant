@@ -1,12 +1,9 @@
-from generate_prompt import get_final_prompt
 from conn import client
+from generate_prompt import get_final_prompt
 
-message_history = []
-cnt = 0
-is_first_message = True
-while True:
+
+def get_ai_answer(user_input: str, message_history: list = [], is_first_message: bool = True, cnt: int = 0):
     ai_answer = ''
-    user_input = input()
     cnt += 1
     if cnt >= 2:
         is_first_message = False
@@ -21,7 +18,6 @@ while True:
                     {"role": "user", "content": user_input},
                 ],
                 max_tokens=1000,
-                temperature=0.6
         ) as stream:
             for event in stream:
                 if event.type == 'chunk' and hasattr(event, 'chunk'):
@@ -31,17 +27,13 @@ while True:
                             event.chunk.choices[0].delta and
                             event.chunk.choices[0].delta.content):
                         ai_answer += event.chunk.choices[0].delta.content
-                        print(event.chunk.choices[0].delta.content, end="", flush=True)
-
-                elif event.type == 'content.delta' and hasattr(event, 'delta'):
-                    # Обрабатываем content.delta события
-                    if event.delta and hasattr(event.delta, 'content') and event.delta.content:
-                        print(event.delta.content, end="", flush=True)
-
-                elif event.type == 'message.completed':
-                    # Событие завершения сообщения
-                    print("\n\nГенерация завершена")
+                        # print(event.chunk.choices[0].delta.content, end="", flush=True)
             message_history.append('ai: ' + ai_answer)
+        return ai_answer
+
 
     except Exception as e:
         print(f"Error: {e}")
+
+
+print(get_ai_answer(input()))
