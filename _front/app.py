@@ -53,7 +53,7 @@ def show_chat():
 @app.route('/profile', methods=['GET'])
 def profile_view():
     token = flask_request.cookies['access_token']
-    uid, name = core.decode_jwt(token)
+    uid, name, is_hr = core.decode_jwt(token)
     lst = str(name).split()
     shortname = ''
     for word in lst:
@@ -83,28 +83,28 @@ def login_post():
         return render_template('login.html', gnev_message='Неверное имя пользователя или пароль!')
     else:
         token = response.cookies['access_token']
-        resp = make_response(app.redirect('/profile'))
-        resp.set_cookie(key='access_token', value=token, max_age=None)
-
         uid, fullname, is_hr = core.decode_jwt(token)
         g.uid = uid
         g.name = fullname
         g.is_hr = is_hr
-
+        if is_hr == 0:
+            resp = make_response(app.redirect('/profile'))
+        else:
+            resp = make_response(app.redirect('/admin'))
+        resp.set_cookie(key='access_token', value=token, max_age=None)
         return resp
 
 
 @app.route('/admin')
 def show_hr_panel():
     token = flask_request.cookies['access_token']
-    uid, name = core.decode_jwt(token)
+    uid, name, is_hr = core.decode_jwt(token)
     lst = str(name).split()
     shortname = ''
     for word in lst:
         shortname += word[0].capitalize()
-    if g.is_hr == 1:
-        return render_template('admin.html', fullname=name[:2], shortname=shortname)
-    return app.redirect('/login')
+
+    return render_template('admin.html', fullname=name, shortname=shortname[:2])
 
 
 @app.route('/admin/dashboard')
