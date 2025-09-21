@@ -93,4 +93,8 @@ def login_post():
         return resp
 
 
+@app.route('/admin')
+def show_hr_panel():
+    return
+
 app.run(debug=True, port=5001, host='0.0.0.0')
