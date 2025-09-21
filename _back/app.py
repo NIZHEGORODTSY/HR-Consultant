@@ -72,7 +72,7 @@ def generate_prompt():
         # Удаляем Future из словаря
         with results_lock:
             results.pop(task_id, None)
-        
+        print(result)
         return make_response({
             "answer": result
         }, 200)

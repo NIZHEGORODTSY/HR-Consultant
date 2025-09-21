@@ -14,6 +14,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     messageInput.value = '';
 
                     // Имитируем ответ ИИ с задержкой
+                    const data = {
+                        "message": message
+                    }
+                    try {
+                        const response = fetch('https://okvuo-5-227-24-17.a.free.pinggy.link:35909/get_answer', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify(data)
+                        });
+
+                        const result = response.json;
+                        alert('Success:', result);
+                    } catch (error) {
+                        addMessage(error, 'ai');
+                      }
 
                 }
             }
